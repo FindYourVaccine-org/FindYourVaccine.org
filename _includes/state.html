@@ -3,6 +3,11 @@
     <div class="intro-text">
       <h3>{{ page.name }}</h3>
       <div id="website"></div>
+      <br />
+      <h6>
+        Last updated: 
+        <span id="updated"></span>
+      </h6>
     </div>
   </div>
 </header>
@@ -39,5 +44,6 @@
     console.log(data);
 
     $("#website").html('<a href="' + data['State Vaccination Website'] + '">' + data['State Vaccination Website'] + '</a>');
+    $("#updated").html(data['Last Updated'] + ' ET');
   }
 </script>
