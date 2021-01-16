@@ -1,0 +1,14 @@
+<header class="masthead">
+  <div class="container">
+    <div class="intro-text">
+      <div class="intro-lead-in">{{ site.data.sitetext.header.title | markdownify }}</div>
+      <div class="intro-heading text-uppercase">{{ site.data.sitetext.header.text | markdownify }}</div>
+      <select class="custom-select" name="state" id="state" onchange="location = this.value;">
+        <option disabled selected value="">Select your state...</option>
+        {% for state in site.states %}
+          <option value="{{ state.abbrev }}">{{ state.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+</header>

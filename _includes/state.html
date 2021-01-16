@@ -1,1 +1,43 @@
-<div class="intro-lead-in">{{ page.title }}</div>
+<header class="masthead">
+  <div class="container">
+    <div class="intro-text">
+      <h3>{{ page.name }}</h3>
+      <div id="website"></div>
+    </div>
+  </div>
+</header>
+
+
+<script>
+  $(document).ready(function () {
+    $.ajax({
+      type: "GET",
+      url: 'https://docs.google.com/spreadsheets/d/1ZlVkvo3jIS_Cyek1SWIPyyyZi0_nI_5rEI4VWLJ80dk/gviz/tq?tqx=out:csv&sheet=states',
+      dataType: "text",
+      success: function (csvData) { parseState(csvData, "{{ page.name }}"); }
+    });
+  });
+
+  function parseState(csv, stateName) {
+    var states = csv.split('\n');
+    var header = states[0].split('","');
+    header[0] = header[0].replace('"', '');
+    header[header.length-1] = header[header.length-1].substr(0, header[header.length-1].length-1);
+
+    var state;
+    for (i=0; i<states.length; i++) {
+      state = states[i].split('","');
+      if (state[0].substr(1) == stateName) {
+        state[0] = state[0].replace('"', '');
+        state[state.length-1] = state[state.length-1].substr(0, state[state.length-1].length-1);
+        break;
+      }
+    }
+
+    var data = {};
+    header.forEach((key, i) => data[key] = state[i]);
+    console.log(data);
+
+    $("#website").html('<a href="' + data['State Vaccination Website'] + '">' + data['State Vaccination Website'] + '</a>');
+  }
+</script>
