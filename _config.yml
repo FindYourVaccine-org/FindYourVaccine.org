@@ -14,7 +14,7 @@
 #theme: jekyll-agency
 remote_theme: raviriley/agency-jekyll-theme
 
-url    : "https://FindYourVaccine.org" # the base hostname & protocol for your site, e.g. http://example.com
+url    : "https://www.FindYourVaccine.org" # the base hostname & protocol for your site, e.g. http://example.com
 baseurl: "" # the subpath of your site, e.g. /blog
 
 title      : FindYourVaccine.org
@@ -24,10 +24,6 @@ author     : FindYourVaccine.org
 # logo:     #optional, defaults to site title
   # path: assets\img\clients\creative-market.jpg
   # height: 60 #height in px, defaults to 52px
-
-integration_spreadsheet_key: 2PACX-1vRYDQXLVDxiDrdCjZ_vJUzRq41SiCFDbVG-YIWS3SIhh2qODOc0Jp5_E0C5k77u5eFRPV9k-XxWq0Pq
-github_user: findyourvaccine
-github_repo: FindYourVaccine.org
 
 analytics:
   google: G-FTXL3JB8C7
