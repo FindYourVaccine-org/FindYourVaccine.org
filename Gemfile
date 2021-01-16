@@ -1,7 +1,8 @@
 #after any changes to the Gemfile, execute bundle update!
 source "https://rubygems.org"
 
-gem "jekyll-agency"
+#gem "jekyll-agency"
+gem "jekyll-remote-theme"
 
 # If you do not want to use GitHub Pages, comment out the line below, then run bundle update.
 #gem "github-pages", group: :jekyll_plugins
