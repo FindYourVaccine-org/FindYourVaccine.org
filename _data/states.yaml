@@ -116,6 +116,9 @@ states:
   - name: "Pennsylvania"
     abbrev: PA
 
+  - name: "Puerto Rico"
+    abbrev: PR
+
   - name: "Rhode Island"
     abbrev: RI
 
