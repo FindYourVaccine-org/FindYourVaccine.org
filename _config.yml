@@ -30,7 +30,7 @@ analytics:
 
 collections:
   states:
-    permalink: /:name
+    permalink: /:title
     output: true
 
 markdown: kramdown
