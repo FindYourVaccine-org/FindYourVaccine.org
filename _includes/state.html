@@ -2,30 +2,43 @@
   <div class="container">
     <div class="intro-text">
       <h2>{{ page.name }}</h2>
-      <br />
       <div>
+        <br />
         For the latest official updates from your state, visit:<br />
         <div id="website"></div>
       </div>
-      <br />
-      <div id="hold-providers-link" class="invisible">
-        For a current list of vaccine providers, visit:<br />
-        <span id="providers-link"></span>
+      {% if page.lat %}
+        <div>
+          <br />
+          For a map of current vaccine providers in {{ page.name }}, click <a href="#content">here</a>.
+        </div>
+      {% else %}
+        <div id="hold-providers-link" class="invisible">
+          <br />
+          For a current list of vaccine providers, visit:<br />
+          <span id="providers-link"></span>
+        </div>
+      {% endif %}
+      <div id="hold-best-link" class="invisible">
+        <br />
+        For {{ page.name }} vaccine rollout details, the best resource we have found so far is:<br />
+        <span id="best-link"></span>
       </div>
-      <br />
-      <h6>
-        Last updated: 
-        <span id="updated"></span>
-      </h6>
-      <br />
       <div id="hold-hotline" class="invisible">
+        <br />
         State hotline: 
         <span id="hotline"></span>
       </div>
+      <small>
+        <br />
+        Last updated: 
+        <span id="updated"></span>
+      </small>
     </div>
   </div>
 </header>
 
+<a name="content"></a>
 {{ content }}
 
 <script>
@@ -63,6 +76,11 @@
     if (data['Providers Link'].length > 0) {
       $("#hold-providers-link").removeClass('invisible');
       $("#providers-link").html(link(data['Providers Link']));
+    }
+
+    if (data['Best Resource'].length > 0) {
+      $("#hold-best-link").removeClass('invisible');
+      $("#best-link").html(link(data['Best Resource']));
     }
 
     if (data['State Vaccination Phone/Hotline'].length > 0) {
