@@ -53,30 +53,27 @@
   $(document).ready(function () {
     $.ajax({
       type: "GET",
-      url: 'https://docs.google.com/spreadsheets/d/1ZlVkvo3jIS_Cyek1SWIPyyyZi0_nI_5rEI4VWLJ80dk/gviz/tq?tqx=out:csv&sheet=states',
+      url: 'https://docs.google.com/spreadsheets/u/1/d/1ZlVkvo3jIS_Cyek1SWIPyyyZi0_nI_5rEI4VWLJ80dk/export?format=tsv&id=1ZlVkvo3jIS_Cyek1SWIPyyyZi0_nI_5rEI4VWLJ80dk&gid=1686627061',
       dataType: "text",
-      success: function (csvData) { parseState(csvData, "{{ page.name }}"); }
+      success: function (tsvData) { parseState(tsvData, "{{ page.name }}"); }
     });
   });
 
-  function parseState(csv, stateName) {
-    var states = csv.split('\n');
-    var header = states[0].split('","');
-    header[0] = header[0].replace('"', '');
-    header[header.length-1] = header[header.length-1].substr(0, header[header.length-1].length-1);
-
+  function parseState(tsv, stateName) {
+    var rows = tsv.split('\n');
+    var states = rows[0].split('\t');
     var state;
-    for (i=0; i<states.length; i++) {
-      state = states[i].split('","');
-      if (state[0].substr(1) == stateName) {
-        state[0] = state[0].replace('"', '');
-        state[state.length-1] = state[state.length-1].substr(0, state[state.length-1].length-1);
+    for (state=0; state<states.length; state++) {
+      if (states[state] == stateName) {
         break;
       }
     }
 
     var data = {};
-    header.forEach((key, i) => data[key] = state[i]);
+    for (j=1; j<rows.length; j++) {
+      var row = rows[j].split('\t');
+      data[row[0]] = row[state];
+    }
 
     $("#website").html(link(data['State Vaccination Website']));
     $("#updated").html(data['Last Updated'] + ' ET');
