@@ -8,6 +8,11 @@
         <div id="website"></div>
       </div>
       <br />
+      <span id="hold-providers-link" class="invisible">
+        For a current list of vaccine providers, visit: 
+        <span id="providers-link"></span>
+      </div>
+      <br />
       <div>
         Last updated: 
         <span id="updated"></span>
@@ -51,16 +56,24 @@
 
     var data = {};
     header.forEach((key, i) => data[key] = state[i]);
-    console.log(data);
 
-    $("#website").html('<a href="' + data['State Vaccination Website'] + '">' + data['State Vaccination Website'] + '</a>');
+    $("#website").html(link(data['State Vaccination Website']));
     $("#updated").html(data['Last Updated'] + ' ET');
+
+    if (data['Providers Link'].length > 0) {
+      $("#hold-providers-link").removeClass('invisible');
+      $("#providers-link").html(data['Providers Link']);
+    }
 
     if (data['State Vaccination Phone/Hotline'].length > 0) {
       $("#hold-hotline").removeClass('invisible');
-      $("#hotline").html(data['State Vaccination Phone/Hotline']);
+      $("#hotline").html(link(data['State Vaccination Phone/Hotline']));
     }
 
+  }
+
+  function link(str) {
+    return '<a href="' + str + '">' + str + '</a>';
   }
 </script>
 
