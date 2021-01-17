@@ -9,7 +9,7 @@
       </div>
       <br />
       <span id="hold-providers-link" class="invisible">
-        For a current list of vaccine providers, visit: 
+        For a current list of vaccine providers, visit:<br />
         <span id="providers-link"></span>
       </div>
       <br />
@@ -62,7 +62,7 @@
 
     if (data['Providers Link'].length > 0) {
       $("#hold-providers-link").removeClass('invisible');
-      $("#providers-link").html(data['Providers Link']);
+      $("#providers-link").html(link(data['Providers Link']));
     }
 
     if (data['State Vaccination Phone/Hotline'].length > 0) {
