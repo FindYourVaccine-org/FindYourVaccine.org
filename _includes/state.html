@@ -19,11 +19,25 @@
           <span id="providers-link"></span>
         </div>
       {% endif %}
-      <div id="hold-best-link" class="invisible">
+
+      <div id="status" class="invisible">
         <br />
-        For {{ page.name }} vaccine rollout details, the best resource we have found so far is:<br />
-        <span id="best-link"></span>
+        As of <strong id="date"></strong>, {{ page.name }} COVID-19 vaccine distribution has entered <strong id="phase"></strong>.
       </div>
+
+      <div id="hold-currently-eligible" class="invisible">
+        <br />
+        <strong>Am I eligible?</strong><br />
+        You are currently eligible if you belong to any of the following groups:<br />
+        <strong id="currently-eligible"></strong>
+      </div>
+
+
+      <div id="hold-resource-1" class="invisible">
+        <br />
+        <span id="resource-1"></span>
+      </div>
+
       <div id="hold-hotline" class="invisible">
         <br />
         State hotline: 
@@ -53,11 +67,14 @@
   $(document).ready(function () {
     $.ajax({
       type: "GET",
-      url: 'https://docs.google.com/spreadsheets/u/1/d/1ZlVkvo3jIS_Cyek1SWIPyyyZi0_nI_5rEI4VWLJ80dk/export?format=tsv&id=1ZlVkvo3jIS_Cyek1SWIPyyyZi0_nI_5rEI4VWLJ80dk&gid=1686627061',
+      url: 'https://docs.google.com/spreadsheets/u/1/d/1ZlVkvo3jIS_Cyek1SWIPyyyZi0_nI_5rEI4VWLJ80dk/export?format=tsv&id=1ZlVkvo3jIS_Cyek1SWIPyyyZi0_nI_5rEI4VWLJ80dk&gid=1487922948',
       dataType: "text",
       success: function (tsvData) { parseState(tsvData, "{{ page.name }}"); }
     });
   });
+
+  var converter = new showdown.Converter();
+  converter.setOption('openLinksInNewWindow', true);
 
   function parseState(tsv, stateName) {
     var rows = tsv.split('\n');
@@ -83,20 +100,46 @@
       $("#providers-link").html(link(data['Providers Link']));
     }
 
-    if (data['Best Resource'].length > 0) {
-      $("#hold-best-link").removeClass('invisible');
-      $("#best-link").html(link(data['Best Resource']));
+    if (data['Resource 1'].length > 0) {
+      $("#hold-resource-1").removeClass('invisible');
+      mark(data['Resource 1'], 'resource-1');
     }
+
+
+
+    if (data['Date of latest phase start'].length > 0 && data['Name of latest phase'].length > 0) {
+      $("#status").removeClass('invisible');
+      mark(data['Date of latest phase start'], 'date');
+      mark(data['Name of latest phase'], 'phase');
+    }
+
+    if (data['List of currently eligible classes'].length > 0) {
+      $("#hold-currently-eligible").removeClass('invisible');
+      mark(data['List of currently eligible classes'], 'currently-eligible', true);
+    }
+
+
+
 
     if (data['State Vaccination Phone/Hotline'].length > 0) {
       $("#hold-hotline").removeClass('invisible');
-      $("#hotline").html(link(data['State Vaccination Phone/Hotline']));
+      $("#hotline").html(data['State Vaccination Phone/Hotline']);
     }
 
   }
 
   function link(str) {
-    return '<a href="' + str + '">' + str + '</a>';
+    return `<a target="_blank" href="${str}">${str}</a>`;
+  }
+
+  function mark(data, id, list=false) {
+    if (list) {
+      console.log(data);
+      var dataArray = data.split('\n');
+      dataArray.forEach((row, i) => dataArray[i] = `- ${row}`);
+      data = dataArray.join();
+    }
+    $("#"+id).html(converter.makeHtml(data));
   }
 </script>
 
