@@ -10,7 +10,7 @@
       {% if page.lat %}
         <div>
           <br />
-          For a map of current vaccine providers in {{ page.name }}, click <a href="#content">here</a>.
+          For a map of current vaccine providers in {{ page.name }}, click <a href="#providers">here</a>.
         </div>
       {% else %}
         <div id="hold-providers-link" class="invisible">
@@ -38,8 +38,16 @@
   </div>
 </header>
 
-<a name="content"></a>
 {{ content }}
+
+<a name="providers"></a>
+{% if page.lat %}
+<center>
+  <div class="w-full mt18" allowfullscreen="" mozallowfullscreen="true" webkitallowfullscreen="true" style="height: 600px;">
+    <div id="map"></div>
+  </div>
+</center>
+{% endif %}
 
 <script>
   $(document).ready(function () {
@@ -120,7 +128,7 @@
   $(document).ready(function () {
     $.ajax({
       type: "GET",
-      url: 'https://docs.google.com/spreadsheets/d/1Zalm4QtBAaPyLE6msTdmiZdEt2yrGAKIQnAAHv8vyjk/gviz/tq?tqx=out:csv&sheet=data',
+      url: 'https://docs.google.com/spreadsheets/d/{{ page.gid }}/gviz/tq?tqx=out:csv&sheet=data',
       dataType: "text",
       success: function (csvData) { makeGeoJSON(csvData); }
     });
