@@ -25,6 +25,31 @@
     transformRequest: transformRequest
   });
 
+
+  var sizes = [
+    'match',
+    ['get', 'Status'],
+    'Red: not available',
+    5,
+    'Yellow: waitlist or limited availability',
+    5,
+    'Green: available for eligible',
+    7,
+    /* other */ 5
+  ];
+
+  var colors = [
+    'match',
+    ['get', 'Status'],
+    'Red: not available',
+    '#b0611a',
+    'Yellow: waitlist or limited availability',
+    '#dfc27d',
+    'Green: available for eligible',
+    '#019071',
+    /* other */ '#444'
+  ];
+
   $(document).ready(function () {
     $.ajax({
       type: "GET",
@@ -40,7 +65,6 @@
         delimiter: ','
       }, function (err, data) {
         map.on('load', function () {
-
           // Add the the layer to the map
           map.addLayer({
             'id': 'csvData',
@@ -50,8 +74,8 @@
               'data': data
             },
             'paint': {
-              'circle-radius': 5,
-              'circle-color': "purple"
+              'circle-radius': sizes,
+              'circle-color': colors
             }
           });
 
@@ -62,11 +86,16 @@
             var coordinates = e.features[0].geometry.coordinates.slice();
 
             //set popup text
-            //You can adjust the values of the popup to match the headers of your CSV.
-            // For example: e.features[0].properties.Name is retrieving information from the field Name in the original CSV.
-            var description = `<h3>` + e.features[0].properties.Name + `</h3>` + `<h4>` + `<b>` + `Address: ` + `</b>` + e.features[0].properties.Address + `</h4>`;
+            var description = `<h3>` + e.features[0].properties.Name + `</h3>`;
+
+            if (e.features[0].properties.Summary) {
+              description += `<h4><b>Latest details: </b>` + e.features[0].properties.Summary + `</h4>`;
+            }
+
+            description += `<h4><b>Address: </b>` + e.features[0].properties.Address + `</h4>`;
+
             if (e.features[0].properties.Phone) {
-              description += `<h4>` + `<b>` + `Phone: ` + `</b>` + e.features[0].properties.Phone + `</h4>`;
+              description += `<h4><b>Phone: </b>` + e.features[0].properties.Phone + `</h4>`;
             }
 
             // Ensure that if the map is zoomed out such that multiple
@@ -84,12 +113,10 @@
               .addTo(map);
           });
 
-          // Change the cursor to a pointer when the mouse is over the places layer.
           map.on('mouseenter', 'csvData', function () {
             map.getCanvas().style.cursor = 'pointer';
           });
 
-          // Change it back to a pointer when it leaves.
           map.on('mouseleave', 'places', function () {
             map.getCanvas().style.cursor = '';
           });
