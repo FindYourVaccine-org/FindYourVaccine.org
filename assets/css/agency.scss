@@ -60,6 +60,10 @@ header.masthead .intro-text .intro-heading {
     width: 600px;
     max-width: 90%;
   }
+
+  p {
+    display: inline;
+  }
 }
 
 @media(min-width:768px) {
@@ -70,10 +74,6 @@ header.masthead .intro-text .intro-heading {
 
 .invisible {
   display: none !important;
-}
-
-p {
-  display: inline;
 }
 
 // Maps
