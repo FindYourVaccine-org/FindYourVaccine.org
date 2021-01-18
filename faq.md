@@ -75,8 +75,7 @@ https://www.cdc.gov/coronavirus/2019-ncov/vaccines/index.html
 8 Things to Know About the U.S. COVID-19 Vaccination Program:
 https://www.cdc.gov/coronavirus/2019-ncov/vaccines/8-things.html
 
-Critical Facts About the COVID-19 Vaccine:
-https://www.cdc.gov/coronavirus/2019-ncov/vaccines/facts.html
+[Critical Facts About the COVID-19 Vaccine:] (https://www.cdc.gov/coronavirus/2019-ncov/vaccines/facts.html)
 
 ### U.S. and Global Vaccine Facts and Figures:
 
