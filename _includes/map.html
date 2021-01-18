@@ -65,7 +65,7 @@
   $(document).ready(function () {
     $.ajax({
       type: "GET",
-      url: 'https://docs.google.com/spreadsheets/d/{{ page.gid }}/gviz/tq?tqx=out:csv&sheet=data',
+      url: 'https://docs.google.com/spreadsheets/d/{{ page.gid }}/gviz/tq?tqx=out:csv&sheet=~DO%20NOT%20EDIT~',
       dataType: "text",
       success: function (csvData) { makeGeoJSON(csvData); }
     });
