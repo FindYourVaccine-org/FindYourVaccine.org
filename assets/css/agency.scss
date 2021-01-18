@@ -68,6 +68,10 @@ header.masthead .intro-text .intro-heading {
     width: 1000px;
   }
 
+  table {
+    max-width: 95%;
+  }
+
   table, th, td {
     border: 1px solid $gray-900;
     padding: 5px;
