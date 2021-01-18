@@ -1,9 +1,21 @@
+<style>
+.filter-ui {
+  background: #fff;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 100;
+  padding: 10px;
+  border-radius: 3px;
+}
+</style>
+
 <center>
   <div class="w-full mt18" allowfullscreen="" mozallowfullscreen="true" webkitallowfullscreen="true" style="height: 600px;">
+    <nav id='filters' class='filter-ui'></nav>
     <div id="map"></div>
   </div>
 </center>
-
 
 <script>
   var transformRequest = (url, resourceType) => {
@@ -47,7 +59,7 @@
     '#dfc27d',
     'Green: available for eligible',
     '#019071',
-    /* other */ '#444'
+    /* other */ '#666'
   ];
 
   $(document).ready(function () {
@@ -89,10 +101,14 @@
             var description = `<h3>` + e.features[0].properties.Name + `</h3>`;
 
             if (e.features[0].properties.Summary) {
-              description += `<h4><b>Latest details: </b>` + e.features[0].properties.Summary + `</h4>`;
+              description += `<h4><b>Latest details: </b>` + converter.makeHtml(e.features[0].properties.Summary) + `</h4>`;
             }
 
             description += `<h4><b>Address: </b>` + e.features[0].properties.Address + `</h4>`;
+
+            if (e.features[0].properties.Website) {
+              description += `<h4><b>Website: </b>` + link(e.features[0].properties.Website) + `</h4>`;
+            }
 
             if (e.features[0].properties.Phone) {
               description += `<h4><b>Phone: </b>` + e.features[0].properties.Phone + `</h4>`;
