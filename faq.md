@@ -60,6 +60,7 @@ Not yet! That's one of the big reasons we got started. We look forward to suppor
 Yes! We applaud the teams behind the excellent sites below, and encourage you to visit and support their efforts:
 
 - [Vaccinate CA](http://www.vaccinateca.com)
+- [Vaccinate MI](https://www.covid19vaccinemi.com/)
 - [Covid 19 Vaccine TX](http://www.covid19vaccinetx.com)
 
 <br/><br/>
