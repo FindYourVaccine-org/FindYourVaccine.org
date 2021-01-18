@@ -55,6 +55,11 @@
           <td id="eligible-3-instruct">y</td>
         </tr>
       </table>
+      <small id="hold-eligible-notes" class="invisible">
+        <br />
+        <strong>Additional notes: </strong>
+        <span id="eligible-notes"></span>
+      </small>
     </div>
   </div>
 
@@ -170,6 +175,10 @@
       $("#hold-eligible-3").removeClass('invisible');
       mark(data['Eligible class 3'], 'eligible-3', true);
       mark(data['Eligible class 3 instructions'], 'eligible-3-instruct');
+    }
+    if (data['Eligible classes - Additional links or notes'].length > 0) {
+      $("#hold-eligible-notes").removeClass('invisible');
+      mark(data['Eligible classes - Additional links or notes'], 'eligible-notes');
     }
 
 
