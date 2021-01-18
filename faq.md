@@ -69,19 +69,16 @@ Yes! We applaud the teams behind the excellent sites below, and encourage you to
 
 ### Official CDC Guidelines on the COVID-19 Vaccine in the U.S.:
 
-The CDC COVID-19 Vaccine Portal:
-https://www.cdc.gov/coronavirus/2019-ncov/vaccines/index.html
+- [The CDC COVID-19 Vaccine Portal:](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/index.html)
 
-8 Things to Know About the U.S. COVID-19 Vaccination Program:
-https://www.cdc.gov/coronavirus/2019-ncov/vaccines/8-things.html
+- [8 Things to Know About the U.S. COVID-19 Vaccination Program:](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/8-things.html)
 
-[Critical Facts About the COVID-19 Vaccine:] (https://www.cdc.gov/coronavirus/2019-ncov/vaccines/facts.html)
+- [Critical Facts About the COVID-19 Vaccine:](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/facts.html)
 
 ### U.S. and Global Vaccine Facts and Figures:
 
 <sup>_FindYourVaccine.org is not affiliated with any publication or resource provided on this page._</sup>
 
-Bloomberg News and World Report Vaccine Distribution Tracker:
-https://www.bloomberg.com/graphics/covid-vaccine-tracker-global-distribution/
+- [Bloomberg News and World Report Vaccine Distribution Tracker:](https://www.bloomberg.com/graphics/covid-vaccine-tracker-global-distribution/)
 
 <br /><br />
