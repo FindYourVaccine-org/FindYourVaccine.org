@@ -51,6 +51,23 @@ header.masthead .intro-text .intro-heading {
   }
 }
 
+.state-holder {
+  padding-top: 80px;
+  padding-bottom: 100px;
+
+  .card {
+    margin-top: 15px;
+    width: 600px;
+    max-width: 90%;
+  }
+}
+
+@media(min-width:768px) {
+  .state-holder {
+    padding-top: 150px;
+  }
+}
+
 .invisible {
   display: none !important;
 }
