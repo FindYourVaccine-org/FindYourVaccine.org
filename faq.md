@@ -51,7 +51,7 @@ Our list of vaccine provider sites and locations comes from these official state
 
 Our updates on current appointment and vaccine availability status at each location comes from regular phone and email-based volunteer outreach to individual provider sites. All updates include the date/timestamp of the most recent check-in.
 
-### Is there an official national database of all vaccine providers operating in all the state?
+### Is there an official national database of all vaccine providers operating in all states?
 
 Not yet! That's one of the big reasons we got started. We look forward to supporting any federal government effort to catalogue and sync up national vaccine providers.
 

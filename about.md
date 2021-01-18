@@ -10,6 +10,13 @@ We are a group of volunteers - Educators, Tech, & Healthcare Professionals - wor
 The FindYourVaccine team is working hard to expand coverage to additional U.S. states and territories. Please check back regularly for new additions, or [follow us on Twitter @findyourvaccine](https://twitter.com/findyourvaccine) for the latest updates.
 
 
+### HOW THIS HELPS
+
+Answers to vaccine eligibility and availability are hard to find in many states. Rollout strategies are still fragmented and rapidly changing.
+
+By aggregating the best resources, vaccine availability updates, and state guidance, we can help everyone find the answers they need faster. This also reduces strain on the system, avoiding the need for everyone to contact dozens of providers and hotlines themselves.
+
+
 ### WHERE WE GET OUR DATA
 
 Our data comes directly from the official COVID-19 vaccine portals for each U.S. state and territory. This includes each state's current vaccine rollout plan and active eligible population groups. The CDC's list of state health portals can be found here.
