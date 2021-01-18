@@ -69,10 +69,12 @@ header.masthead .intro-text .intro-heading {
   }
 
   table {
-    max-width: 95%;
+    table-layout: fixed;
+    width: 100%;
   }
 
   table, th, td {
+    word-wrap: break-word;
     border: 1px solid $gray-900;
     padding: 5px;
   }
