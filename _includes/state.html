@@ -65,10 +65,27 @@
 
   <div class="card card-thin mx-auto invisible" id="hold-not-eligible">
     <div class="card-body">
-      <div>
-        <h4>I'm not eligible yet. When can I get the vaccine?</h4>
-        <span id="not-eligible"></span>
-      </div>
+      <h4>I'm not eligible yet. When can I get the vaccine?</h4>
+      <table id="not-eligible-phases">
+        <tr><th>Group</th><th>Timeline</th></tr>
+        <tr>
+          <td id="not-eligible-1"></td>
+          <td id="not-eligible-1-time">y</td>
+        </tr>
+        <tr id="hold-not-eligible-2" class="invisible">
+          <td id="not-eligible-2"></td>
+          <td id="not-eligible-2-time">y</td>
+        </tr>
+        <tr id="hold-not-eligible-3" class="invisible">
+          <td id="not-eligible-3"></td>
+          <td id="not-eligible-3-time">y</td>
+        </tr>
+      </table>
+      <small id="hold-not-eligible-notes" class="invisible">
+        <br />
+        <strong>Additional notes: </strong>
+        <span id="not-eligible-notes"></span>
+      </small>
     </div>
   </div>
 
@@ -181,7 +198,36 @@
       mark(data['Eligible classes - Additional links or notes'], 'eligible-notes');
     }
 
+    if (data['List of next phase 1 eligible classes'].length > 0 || data['Not eligible - Additional links or notes']) {
+      $("#hold-not-eligible").removeClass('invisible');
 
+      if (data['List of next phase 1 eligible classes'].length > 0) {
+        $("#hold-not-eligible").removeClass('invisible');
+        mark(data['List of next phase 1 eligible classes'], 'not-eligible-1', true);
+        var phase1time = data['Next phase 1 estimated start date'];
+        if (phase1time.length == 0) { phase1time = '[Unknown]'}
+        mark(phase1time, 'not-eligible-1-time');
+      }
+      if (data['List of next phase 2 eligible classes'].length > 0) {
+        $("#hold-not-eligible-2").removeClass('invisible');
+        mark(data['List of next phase 2 eligible classes'], 'not-eligible-2', true);
+        var phase2time = data['Next phase 2 estimated start date'];
+        if (phase2time.length == 0) { phase2time = '[Unknown]'}
+        mark(phase2time, 'not-eligible-2-time');
+      }
+      if (data['List of next phase 3 eligible classes'].length > 0) {
+        $("#hold-not-eligible-3").removeClass('invisible');
+        mark(data['List of next phase 3 eligible classes'], 'not-eligible-3', true);
+        var phase3time = data['Next phase 3 estimated start date'];
+        if (phase3time.length == 0) { phase3time = '[Unknown]'}
+        mark(phase3time, 'not-eligible-3-time');
+      }
+      if (data['Not eligible - Additional links or notes'].length > 0) {
+        $("#hold-not-eligible-notes").removeClass('invisible');
+        mark(data['Not eligible - Additional links or notes'], 'not-eligible-notes');
+      }
+
+    }
 
     if (data['State Vaccination Phone/Hotline'].length > 0) {
       $("#hold-hotline").removeClass('invisible');
@@ -191,10 +237,12 @@
   }
 
   function link(str) {
+    str = str.trim();
     return `<a target="_blank" href="${str}">${str}</a>`;
   }
 
   function mark(data, id, list=false) {
+    data = data.trim();
     if (list) {
       var dataArray = data.split('\n');
       dataArray.forEach((row, i) => dataArray[i] = `- ${row}`);
