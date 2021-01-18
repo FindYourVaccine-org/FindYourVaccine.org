@@ -2,5 +2,8 @@ nav:
   - title: "Home"
     url: /
 
-  - title: "About"
+  - title: "Vaccine FAQ"
+    url: /faq
+
+  - title: "About Us"
     url: /about
