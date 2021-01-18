@@ -24,6 +24,10 @@
         <br />
         As of <strong id="date"></strong>, {{ page.name }} COVID-19 vaccine distribution has entered <strong id="phase"></strong>.
       </div>
+      <small>
+        Last updated: 
+        <span id="updated"></span>
+      </small>
 
       <div id="hold-currently-eligible" class="invisible">
         <br />
@@ -43,11 +47,6 @@
         State hotline: 
         <span id="hotline"></span>
       </div>
-      <small>
-        <br />
-        Last updated: 
-        <span id="updated"></span>
-      </small>
     </div>
   </div>
 </header>
@@ -67,29 +66,29 @@
   $(document).ready(function () {
     $.ajax({
       type: "GET",
-      url: 'https://docs.google.com/spreadsheets/u/1/d/1ZlVkvo3jIS_Cyek1SWIPyyyZi0_nI_5rEI4VWLJ80dk/export?format=tsv&id=1ZlVkvo3jIS_Cyek1SWIPyyyZi0_nI_5rEI4VWLJ80dk&gid=1487922948',
+      url: 'https://docs.google.com/spreadsheets/d/1ZlVkvo3jIS_Cyek1SWIPyyyZi0_nI_5rEI4VWLJ80dk/gviz/tq?tqx=out:csv&sheet=State%20Summaries',
       dataType: "text",
-      success: function (tsvData) { parseState(tsvData, "{{ page.name }}"); }
+      success: function (csvData) { parseState(csvData, "{{ page.name }}"); }
     });
   });
 
   var converter = new showdown.Converter();
   converter.setOption('openLinksInNewWindow', true);
 
-  function parseState(tsv, stateName) {
-    var rows = tsv.split('\n');
-    var states = rows[0].split('\t');
-    var state;
-    for (state=0; state<states.length; state++) {
-      if (states[state] == stateName) {
+  function parseState(csv, stateName) {
+    var rows = Papa.parse(csv).data;
+    var states = rows[0];
+
+    var stateCol;
+    for (stateCol=0; stateCol<states.length; stateCol++) {
+      if (states[stateCol] == stateName) {
         break;
       }
     }
 
-    var data = {};
-    for (j=1; j<rows.length; j++) {
-      var row = rows[j].split('\t');
-      data[row[0]] = row[state];
+    data = {};
+    for (i=1; i<rows.length; i++) {
+      data[rows[i][0]] = rows[i][stateCol];
     }
 
     $("#website").html(link(data['State Vaccination Website']));
@@ -134,10 +133,9 @@
 
   function mark(data, id, list=false) {
     if (list) {
-      console.log(data);
       var dataArray = data.split('\n');
       dataArray.forEach((row, i) => dataArray[i] = `- ${row}`);
-      data = dataArray.join();
+      data = dataArray.join('\n');
     }
     $("#"+id).html(converter.makeHtml(data));
   }
