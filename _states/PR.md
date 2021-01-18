@@ -1,5 +1,5 @@
 ---
 name: Puerto Rico
-abbrev: AR
+abbrev: PR
 layout: state
 ---

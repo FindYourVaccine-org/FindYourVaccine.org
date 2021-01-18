@@ -103,6 +103,7 @@
       <span id="hotline"></span>
     </div>
   </center>
+  <br /><br />
 </div>
 
 {{ content }}
@@ -243,6 +244,7 @@
 
   function mark(data, id, list=false) {
     data = data.trim();
+    data = data.replace('\n\n', '\n');
     if (list) {
       var dataArray = data.split('\n');
       dataArray.forEach((row, i) => dataArray[i] = `- ${row}`);
