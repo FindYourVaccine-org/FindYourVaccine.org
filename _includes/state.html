@@ -166,7 +166,7 @@
     }
 
 
-    if (data['Date of latest phase start'].length > 0 && data['Name of latest phase'].length > 0) {
+    if (data['Date of latest phase start'].length > 1 && data['Name of latest phase'].length > 0) {
       $("#status").removeClass('invisible');
       mark(data['Date of latest phase start'], 'date');
       mark(data['Name of latest phase'], 'phase');

@@ -1,10 +1,12 @@
 <style>
 .filter-ui {
+  display: none;
   background: #fff;
   position: absolute;
   top: 10px;
-  right: 10px;
+  left: 10px;
   z-index: 100;
+  text-align: left;
   padding: 10px;
   border-radius: 3px;
 }
@@ -12,8 +14,9 @@
 
 <center>
   <div class="w-full mt18" allowfullscreen="" mozallowfullscreen="true" webkitallowfullscreen="true" style="height: 600px;">
-    <nav id='filters' class='filter-ui'></nav>
-    <div id="map"></div>
+    <div id="map">
+      <nav id='filters' class='filter-ui'></nav>
+    </div>
   </div>
 </center>
 
@@ -36,7 +39,6 @@
     zoom: 4, // starting zoom
     transformRequest: transformRequest
   });
-
 
   var sizes = [
     'match',
@@ -62,6 +64,8 @@
     /* other */ '#666'
   ];
 
+  var filters = document.getElementById('filters');
+
   $(document).ready(function () {
     $.ajax({
       type: "GET",
@@ -77,8 +81,8 @@
         delimiter: ','
       }, function (err, data) {
         map.on('load', function () {
-          // Add the the layer to the map
-          map.addLayer({
+          // Add the data layer to the map
+          var dataLayer = {
             'id': 'csvData',
             'type': 'circle',
             'source': {
@@ -89,8 +93,8 @@
               'circle-radius': sizes,
               'circle-color': colors
             }
-          });
-
+          };
+          map.addLayer(dataLayer);
 
           // When a click event occurs on a feature in the csvData layer, open a popup at the
           // location of the feature, with description HTML from its properties.
@@ -121,8 +125,7 @@
               coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
             }
 
-            //add Popup to map
-
+            // add popup to map
             new mapboxgl.Popup()
               .setLngLat(coordinates)
               .setHTML(description)
@@ -140,8 +143,50 @@
           var bbox = turf.bbox(data);
           map.fitBounds(bbox, { padding: 50 });
 
-        });
+          // add status filters
+          var typesObj = {}, types = [];
+          for (var i = 0; i < data.features.length; i++) {
+            typesObj[data.features[i].properties['Status']] = true;
+          }
+          for (var k in typesObj) { types.push(k) };
 
+          var checkboxes = [];
+          // Create a filter interface.
+          for (var i = 0; i < types.length; i++) {
+            // Create an an input checkbox and label inside.
+            var item = filters.appendChild(document.createElement('div'));
+            var checkbox = item.appendChild(document.createElement('input'));
+            var label = item.appendChild(document.createElement('label'));
+            checkbox.type = 'checkbox';
+            checkbox.id = types[i];
+            checkbox.checked = true;
+            // create a label to the right of the checkbox with explanatory text
+            label.innerHTML = types[i];
+            label.setAttribute('for', types[i]);
+            // Whenever a person clicks on this checkbox, call the update().
+            checkbox.addEventListener('change', update);
+            checkboxes.push(checkbox);
+          }
+
+          // Call when someone clicks on a checkbox and changes the selection of markers to be displayed
+          function update() {
+            var enabled = {};
+            for (var i = 0; i < checkboxes.length; i++) {
+              if (checkboxes[i].checked) enabled[checkboxes[i].id] = true;
+            }
+            dataLayer.setFilter(function(feature) {
+              return (feature.properties['Status'] in enabled);
+            });
+          }
+
+          map.addControl(
+            new MapboxGeocoder({
+              accessToken: mapboxgl.accessToken,
+              mapboxgl: mapboxgl
+            })
+          );
+
+        });
       });
     };
   });
