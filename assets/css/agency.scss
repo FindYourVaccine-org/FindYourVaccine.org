@@ -57,8 +57,24 @@ header.masthead .intro-text .intro-heading {
 
   .card {
     margin-top: 15px;
+  }
+
+  .card-thin {
     width: 600px;
     max-width: 90%;
+  }
+
+  .card-wide {
+    width: 1000px;
+    max-width: 100%;
+  }
+
+  table, th, td {
+    border: 1px solid $gray-900;
+    padding: 5px;
+  }
+  th {
+    background-color: $gray-300;
   }
 
   p {

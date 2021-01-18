@@ -29,7 +29,7 @@
     </small>
   </div>
 
-  <div class="card mx-auto">
+  <div class="card card-thin mx-auto">
     <div class="card-body">
       <div id="hold-currently-eligible" class="invisible">
         <h4>Am I eligible?</h4>
@@ -39,10 +39,31 @@
     </div>
   </div>
 
+  <div class="card card-wide mx-auto">
+    <div class="card-body">
+      <div id="hold-eligible" class="invisible">
+        <h4>I'm eligible. How do I get the vaccine?</h4>
+        <table>
+          <tr><th>Group</th><th>Instructions</th></tr>
+          <tr>
+            <td id="eligible-1"></td>
+            <td id="eligible-1-instruct">y</td>
+          </tr>
+          <tr id="hold-eligible-2" class="invisible">
+            <td id="eligible-2"></td>
+            <td id="eligible-2-instruct">y</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
   <center>
     <div id="hold-resource-1" class="invisible">
       <br />
-      <span id="resource-1"></span>
+      Additional resources:<br />
+      <span id="resource-1"></span><br />
+      <span id="resource-2"></span>
     </div>
 
     <div id="hold-hotline" class="invisible">
@@ -80,6 +101,7 @@
 
   var converter = new showdown.Converter();
   converter.setOption('openLinksInNewWindow', true);
+  converter.setOption('simplifiedAutoLink', true);
 
   function parseState(csv, stateName) {
     var rows = Papa.parse(csv).data;
@@ -109,7 +131,9 @@
       $("#hold-resource-1").removeClass('invisible');
       mark(data['Resource 1'], 'resource-1');
     }
-
+    if (data['Resource 2'].length > 0) {
+      mark(data['Resource 2'], 'resource-2');
+    }
 
 
     if (data['Date of latest phase start'].length > 0 && data['Name of latest phase'].length > 0) {
@@ -123,6 +147,16 @@
       mark(data['List of currently eligible classes'], 'currently-eligible', true);
     }
 
+    if (data['Eligible class 1'].length > 0) {
+      $("#hold-eligible").removeClass('invisible');
+      mark(data['Eligible class 1'], 'eligible-1', true);
+      mark(data['Eligible class 1 instructions'], 'eligible-1-instruct');
+    }
+    if (data['Eligible class 2'].length > 0) {
+      $("#hold-eligible-2").removeClass('invisible');
+      mark(data['Eligible class 2'], 'eligible-2', true);
+      mark(data['Eligible class 2 instructions'], 'eligible-2-instruct');
+    }
 
 
 
