@@ -106,6 +106,27 @@ a {
   width: 100vw;
 }
 
+/* Map filter styling */
+.filter-ui {
+  background: #fff;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  text-align: left;
+  padding: 10px;
+  border-radius: 3px;
+
+  label {
+    padding-left: 3px;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+}
+
 /* Popup styling */
 
 .mapboxgl-popup {
