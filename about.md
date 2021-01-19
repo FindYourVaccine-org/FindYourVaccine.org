@@ -28,7 +28,7 @@ Our updates on current appointment and vaccine availability status at each locat
 
 ### HOW TO GET INVOLVED
 
-Join us! We are a volunteer-based team. A form will be made availabile shortly to register interest in joining us. For now, please email us at info@findyourvaccine.org, referencing your role of interest. As opportunities become available to support our efforts, they will be placed below:
+Join us! We are a volunteer-based team. [Please reach out to us on the contact form, and indicate your interest in one or more of the open roles.](https://docs.google.com/forms/d/e/1FAIpQLScGb49aeBfUVZEclKEtj9NYEYPC5UkVIBdNO3gY5y0WWaQkpw/viewform) As opportunities become available to support our efforts, they will be placed below:
 
 Outreach Coordinator: You take responsibility for coordinating the daily calling efforts for one or more states. You have a passion for organization, you keep the train moving, and you love to build a team. You are available for an estimate  of 30 minutes to 1 hr per day.
 
@@ -51,7 +51,7 @@ A note on roles and opportunities: We understand the challenge in taking on thes
 
 ### CONTACT US
 
-We welcome contact, coordination and partnership with government agencies, public/private healthcare providers, and similar data-sharing efforts. Please reach out to us at info@findyourvaccine.org for any of the following:
+We welcome contact, coordination and partnership with government agencies, public/private healthcare providers, and similar data-sharing efforts. [Please reach out to us through the contact form here](https://docs.google.com/forms/d/e/1FAIpQLScGb49aeBfUVZEclKEtj9NYEYPC5UkVIBdNO3gY5y0WWaQkpw/viewform) or at [info@findyourvaccine.org](mailto:info@findyourvaccine.org) for any of the following:
 
 - Federal, state or local government entities looking to contact us, coordinate with us, or partner with us
 - Public or private vaccine providers looking to contact us, coordinate with us, or partner with us
