@@ -3,6 +3,7 @@ source "https://rubygems.org"
 
 #gem "jekyll-agency"
 gem "jekyll-remote-theme"
+gem "jekyll-sitemap"
 
 # If you do not want to use GitHub Pages, comment out the line below, then run bundle update.
 #gem "github-pages", group: :jekyll_plugins
