@@ -168,8 +168,9 @@
 
     if (data['Date of latest phase start'].length > 1 && data['Name of latest phase'].length > 0) {
       $("#status").removeClass('invisible');
-      mark(data['Date of latest phase start'], 'date');
-      mark(data['Name of latest phase'], 'phase');
+
+      $("#date").html(data['Date of latest phase start']);
+      $("#phase").html(data['Name of latest phase']);
     }
 
     if (data['List of currently eligible classes'].length > 0) {
@@ -242,12 +243,27 @@
 
   function mark(data, id, list=false) {
     data = data.trim();
-    data = data.replace('\n\n', '\n');
-    if (list) {
-      var dataArray = data.split('\n');
-      dataArray.forEach((row, i) => dataArray[i] = `- ${row}`);
-      data = dataArray.join('\n');
-    }
+    var dataArray = data.split('\n');
+    dataArray.forEach((row, i) => {
+      if (list) {
+        if (row.length > 0) {
+          if (dataArray.length > 1) {
+            dataArray[i] = `- ${row}`
+          } else {
+            dataArray[i] = `${row}`
+          }
+        } else {
+          dataArray[i] = '<br /><br />'
+        }
+      } else {
+        if (row.length > 0) {
+          dataArray[i] = `${row}<br />`
+        } else {
+          dataArray[i] = '<br />'
+        }
+      }
+    });
+    data = dataArray.join('\n');
     $("#"+id).html(converter.makeHtml(data));
   }
 </script>
