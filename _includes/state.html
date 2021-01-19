@@ -256,10 +256,10 @@
           dataArray[i] = '<br /><br />'
         }
       } else {
-        if (row.length > 0) {
+        if (dataArray.length > 1) {
           dataArray[i] = `${row}<br />`
         } else {
-          dataArray[i] = '<br />'
+          dataArray[i] = row
         }
       }
     });
