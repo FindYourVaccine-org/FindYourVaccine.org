@@ -179,12 +179,16 @@
             });
           }
 
-          map.addControl(
-            new MapboxGeocoder({
-              accessToken: mapboxgl.accessToken,
-              mapboxgl: mapboxgl
-            })
-          );
+          var geocoder = new MapboxGeocoder({
+            accessToken: mapboxgl.accessToken,
+            mapboxgl: mapboxgl
+          })
+          geocoder.setCountries("us");
+          geocoder.setProximity({
+            latitude: "{{page.lat}}",
+            longitude: "{{page.lon}}"
+          });
+          map.addControl(geocoder);
 
         });
       });
