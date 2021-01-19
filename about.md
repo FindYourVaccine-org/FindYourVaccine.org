@@ -28,16 +28,25 @@ Our updates on current appointment and vaccine availability status at each locat
 
 ### HOW TO GET INVOLVED
 
-Join us! We are a volunteer-based team. As opportunities become available to support our efforts, they will be placed below:
+Join us! We are a volunteer-based team. A form will be made availabile shortly to register interest in joining us. For now, please email us at info@findyourvaccine.org, referencing your role of interest. As opportunities become available to support our efforts, they will be placed below:
 
-State Outreach Volunteer Coordinators (Stay tuned!):
-
-Over the week of January 18th, we will begin actively recruiting volunteers to coordinate regular volunteer outreach efforts. Coordinators will be responsible for all outreach activities within individual states. An application form will be posted here. Applicants will be contacted by the recruitment arm of the FindYourVaccine team.
+Outreach Coordinator: You take responsibility for coordinating the daily calling efforts for one or more states. You have a passion for organization, you keep the train moving, and you love to build a team. You are available for an estimate  of 30 minutes to 1 hr per day.
 
 
-State Outreach Volunteers (Stay tuned!):
+Outreach volunteer: You are the heart of this thing! You are matched with one or more state outreach coordinators, and you contact vaccine providers within that state for their current status updates. Your real-time updates go right onto the site. Preference will be given to folks who can commit to daily update sessions.
 
-Over the week of January 18th, we will begin actively recruiting volunteers to assist with outreach efforts in each state. An application form will be posted here. Applicants will be contacted by the outreach coordinator for each state.
+
+UX/UI Designer: We are seeking a talented UX/UI designer to help us improve the experience of using our platform on both desktop and mobile platforms. Proficiency working with accessibility is a plus.
+
+
+Media/PR Coordinator: We are seeking someone with Media and PR experience to manage media inquiries, press releases, interviews and other journalism engagements.
+
+
+Social Media Manager: We are seeking one or more people with social media management experience to establish and run our social media presence. This includes our twitter and facebook presence, as well as any other platform engagements deemed necessary.
+
+
+A note on roles and opportunities: We understand the challenge in taking on these roles on a volunteer basis. This is a community-driven project, and an experiment in what kind of resourcing we all can provide for the general public when the need arises. We will work hard to meet you where you are, and we appreciate every minute you give in support of the team.
+
 
 
 ### CONTACT US
