@@ -93,7 +93,7 @@
             var description = `<h3>${ps.Name}</h3>`;
 
             if (ps.Summary) {
-              description += `<small>Last update as of ${ps['Last Updated']}: </small>${converter.makeHtml(ps.Summary)}`;
+              description += `<small>Last updated ${ps['Last Updated']}: </small>${converter.makeHtml(ps.Summary)}`;
             }
 
             description += `<h4><b>Address: </b>${ps.Address}</h4>`;

@@ -42,6 +42,10 @@
   <div class="card card-wide mx-auto invisible" id="hold-eligible">
     <div class="card-body">
       <h4>I'm eligible. How do I get the vaccine?</h4>
+      <small id="hold-eligible-notes" class="invisible">
+        <strong>Notes: </strong>
+        <span id="eligible-notes"></span>
+      </small>
       <table>
         <tr><th>Group</th><th>Instructions</th></tr>
         <tr>
@@ -57,17 +61,16 @@
           <td id="eligible-3-instruct">y</td>
         </tr>
       </table>
-      <small id="hold-eligible-notes" class="invisible">
-        <br />
-        <strong>Additional notes: </strong>
-        <span id="eligible-notes"></span>
-      </small>
     </div>
   </div>
 
   <div class="card card-thin mx-auto invisible" id="hold-not-eligible">
     <div class="card-body">
       <h4>I'm not eligible yet. When can I get the vaccine?</h4>
+      <small id="hold-not-eligible-notes" class="invisible">
+        <strong>Notes: </strong>
+        <span id="not-eligible-notes"></span>
+      </small>
       <table id="not-eligible-phases" class="invisible">
         <tr><th>Group</th><th>Timeline</th></tr>
         <tr>
@@ -83,11 +86,6 @@
           <td id="not-eligible-3-time">y</td>
         </tr>
       </table>
-      <small id="hold-not-eligible-notes" class="invisible">
-        <br />
-        <strong>Additional notes: </strong>
-        <span id="not-eligible-notes"></span>
-      </small>
     </div>
   </div>
 
