@@ -45,9 +45,9 @@ Vaccine allocation to each state is managed by the Federal Government - specific
 
 ### Where we get our data:
 
-Our data comes directly from the official COVID-19 vaccine portals for each U.S. state and territory. This includes each state's current vaccine rollout plan and active eligible population groups. [The CDC's list of these state portals can be found here](https://www.cdc.gov/publichealthgateway/healthdirectories/healthdepartments.html).
+Our eligibility data primarily comes directly from the official COVID-19 vaccine portals for each U.S. state and territory. This includes each state's current vaccine rollout plan and active eligible population groups. [The CDC's list of these state portals can be found here](https://www.cdc.gov/publichealthgateway/healthdirectories/healthdepartments.html).
 
-Our list of vaccine provider sites and locations comes from these official state portals, as well as applicable local jurisdiction portals (regional/county/municipality).
+Our list of vaccine provider sites and locations comes from these official state portals, as well as applicable local jurisdiction portals (regional/county/municipality) and community-provided sources.
 
 Our updates on current appointment and vaccine availability status at each location comes from regular phone and email-based volunteer outreach to individual provider sites. All updates include the date/timestamp of the most recent check-in.
 
