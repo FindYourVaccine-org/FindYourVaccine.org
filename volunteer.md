@@ -1,10 +1,6 @@
 ---
-layout: default
+layout: page
 title: Volunteer
 ---
-{% include navheader.html %}
-{% include splash.html %}
 
-<script>
-  window.location.replace("https://bit.ly/findyourvaccinevolunteer");
-</script>
+<iframe class="airtable-embed" src="https://airtable.com/embed/shrbxxLSJ0qfURPKe" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
