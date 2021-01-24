@@ -26,26 +26,14 @@
     transformRequest: transformRequest
   });
 
-  var sizes = [
-    'match',
-    ['get', 'Status'],
-    'Not available',
-    5,
-    'Waitlist or limited availability',
-    5,
-    'Available for eligible',
-    7,
-    /* other */ 5
-  ];
-
   var colors = [
     'match',
-    ['get', 'Status'],
-    'Not available',
+    ['get', 'Appointment available?'],
+    'No',
     '#b0611a',
     'Waitlist or limited availability',
     '#dfc27d',
-    'Available for eligible',
+    'Yes',
     '#019071',
     /* other */ '#666'
   ];
@@ -55,15 +43,15 @@
   $(document).ready(function () {
     $.ajax({
       type: "GET",
-      url: 'https://docs.google.com/spreadsheets/d/{{ page.gid }}/gviz/tq?tqx=out:csv&sheet=~DO%20NOT%20EDIT~',
+      url: 'https://docs.google.com/spreadsheets/d/1124pvazfFxhHkfFldcdrhSoh8DlpPwu0QvUskupEiG0/gviz/tq?tqx=out:csv&sheet={{ page.abbrev }}',
       dataType: "text",
       success: function (csvData) { makeGeoJSON(csvData); }
     });
 
     function makeGeoJSON(csvData) {
       csv2geojson.csv2geojson(csvData, {
-        latfield: 'Latitude',
-        lonfield: 'Longitude',
+        latfield: 'Lat',
+        lonfield: 'Lon',
         delimiter: ','
       }, function (err, data) {
         map.on('load', function () {
@@ -76,7 +64,7 @@
               'data': data
             },
             'paint': {
-              'circle-radius': sizes,
+              'circle-radius': 5,
               'circle-color': colors
             }
           };
@@ -93,17 +81,13 @@
             var description = `<h3>${ps.Name}</h3>`;
 
             if (ps.Summary) {
-              description += `<small>Last updated ${ps['Last Updated']}: </small>${converter.makeHtml(ps.Summary)}`;
+              description += `<small>Last updated: ${ps['Last Contacted']}</small>${converter.makeHtml(ps.Summary)}`;
             }
 
             description += `<h4><b>Address: </b>${ps.Address}</h4>`;
 
             if (ps.Website) {
               description += `<h4><b>Website: </b>${link(ps.Website)}</h4>`;
-            }
-
-            if (ps.Phone) {
-              description += `<h4><b>Phone: </b>${ps.Phone}</h4>`;
             }
 
             // Ensure that if the map is zoomed out such that multiple
