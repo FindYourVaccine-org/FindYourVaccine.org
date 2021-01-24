@@ -96,7 +96,7 @@
           }
 
           if (ps.Email) {
-            description += `<h4><b>Email: </b>${ps.Email}</h4>`;
+            description += `<h4><b>Email: </b><a href="mailto:${ps.Email}">${ps.Email}</a></h4>`;
           }
 
           // Ensure that if the map is zoomed out such that multiple
@@ -107,10 +107,13 @@
           }
 
           // add popup to map
-          new mapboxgl.Popup()
+          var popup = new mapboxgl.Popup()
             .setLngLat(coordinates)
             .setHTML(description)
             .addTo(map);
+          // center map on popup
+          // map.flyTo({ center: coordinates }, { speed: 0.1 });
+
         });
 
         map.on('mouseenter', 'csvData', function () {
