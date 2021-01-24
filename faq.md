@@ -60,7 +60,11 @@ Not yet! That's one of the big reasons we got started. We look forward to suppor
 Yes! We applaud the teams behind the excellent sites below, and encourage you to visit and support their efforts:
 
 - [Vaccinate CA](http://www.vaccinateca.com)
+- [Vaccinate GA](http://www.vaccinatega.com)
 - [Vaccinate MI](https://www.covid19vaccinemi.com/)
+- [Vaccinate PA](http://www.vaccinatepa.org)
+- [NYC Vaccine List](http://www.nycvaccinelist.com)
+- [COVID-19 Vaccine Status NJ](https://covid19vaccinestatusnj.com/)
 - [Covid 19 Vaccine TX](http://www.covid19vaccinetx.com)
 
 <br/><br/>
