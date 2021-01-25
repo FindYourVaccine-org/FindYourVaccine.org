@@ -1,7 +1,9 @@
 <center>
   <div class="w-full mt18" allowfullscreen="" mozallowfullscreen="true" webkitallowfullscreen="true" style="height: 600px;">
     <div id="map">
-      <!-- <nav id='filters' class='filter-ui'></nav> -->
+      <nav id='filters' class='filter-ui'>
+        <strong class='filter-header'>Filter providers by status:</strong>
+      </nav>
     </div>
     <!-- <table id="providers" class="table table-striped"></table> -->
   </div>
@@ -26,6 +28,8 @@
     zoom: 4, // starting zoom
     transformRequest: transformRequest
   });
+
+  // map.scrollZoom.disable();
 
   var colors = [
     'match',
@@ -54,6 +58,9 @@
   });
 
   function makeMap(csvData) {
+    var markers = [];
+    var clickedStateId = null;
+
     csv2geojson.csv2geojson(csvData, {
       latfield: 'Lat',
       lonfield: 'Lon',
@@ -61,7 +68,7 @@
     }, function (err, data) {
       map.on('load', function () {
         // Add the data layer to the map
-        var dataLayer = {
+        map.addLayer({
           'id': 'csvData',
           'type': 'circle',
           'source': {
@@ -72,12 +79,55 @@
             'circle-radius': 5,
             'circle-color': colors
           }
-        };
-        map.addLayer(dataLayer);
+        });
 
-        // When a click event occurs on a feature in the csvData layer, open a popup at the
-        // location of the feature, with description HTML from its properties.
+        // add hover 'target' layer
+        map.addLayer({
+          'id': 'clickData',
+          'type': 'circle',
+          'source': {
+            'type': 'geojson',
+            'data': data
+          },
+          'layout': {},
+          'paint': {
+            'circle-radius': 7,
+            'circle-opacity': 0,
+            'circle-stroke-color': '#000',
+            'circle-stroke-width': 3,
+            'circle-stroke-opacity': [
+              'case',
+              ['boolean', ['feature-state', 'clicked'], false],
+                1, 0
+            ]
+          }
+        });
+
+        // Show click layer for single marker when clicked
+        map.on('click', 'clickData', function (e) {
+          if (e.features.length > 0) {
+            if (clickedStateId) {
+              map.setFeatureState(
+                { source: {'type': 'geojson', 'data': data},
+                  id: clickedStateId },
+                { clicked: false }
+              );
+            }
+
+            clickedStateId = e.features[0].id;
+
+            map.setFeatureState(
+              { source: {'type': 'geojson', 'data': data},
+                id: clickedStateId },
+              { clicked: true }
+            );
+          }
+        });
+
+        // When a click event occurs on a feature in the csvData layer, open a popup with description HTML from its properties.
         map.on('click', 'csvData', function (e) {
+          markers = map.queryRenderedFeatures({ layers: ['csvData'] });
+
           var coordinates = e.features[0].geometry.coordinates.slice();
 
           // set popup text
@@ -111,16 +161,13 @@
             .setLngLat(coordinates)
             .setHTML(description)
             .addTo(map);
-          // center map on popup
-          // map.flyTo({ center: coordinates }, { speed: 0.1 });
-
         });
 
         map.on('mouseenter', 'csvData', function () {
           map.getCanvas().style.cursor = 'pointer';
         });
 
-        map.on('mouseleave', 'places', function () {
+        map.on('mouseleave', 'csvData', function () {
           map.getCanvas().style.cursor = '';
         });
 
@@ -133,34 +180,42 @@
           typesObj[data.features[i].properties['Status']] = true;
         }
         for (var k in typesObj) { types.push(k) };
+        types.sort();
 
         var checkboxes = [];
         // Create a filter interface.
-        // for (var i = 0; i < types.length; i++) {
-        //   // Create an an input checkbox and label inside.
-        //   var item = filters.appendChild(document.createElement('div'));
-        //   var checkbox = item.appendChild(document.createElement('input'));
-        //   var label = item.appendChild(document.createElement('label'));
-        //   checkbox.type = 'checkbox';
-        //   checkbox.id = types[i];
-        //   checkbox.checked = true;
-        //   // create a label to the right of the checkbox with explanatory text
-        //   label.innerHTML = types[i];
-        //   label.setAttribute('for', types[i]);
-        //   // Whenever a person clicks on this checkbox, call the update().
-        //   checkbox.addEventListener('change', update);
-        //   checkboxes.push(checkbox);
-        // }
+        for (var i=0; i < types.length; i++) {
+          // Create an an input checkbox and label inside.
+          var item = filters.appendChild(document.createElement('div'));
+          var checkbox = item.appendChild(document.createElement('input'));
+          var label = item.appendChild(document.createElement('label'));
+          checkbox.type = 'checkbox';
+          checkbox.id = types[i];
+          checkbox.checked = true;
+          // create a label to the right of the checkbox with explanatory text
+          label.innerHTML = types[i];
+          label.setAttribute('for', types[i]);
+          // Whenever a person clicks on this checkbox, call the update().
+          checkbox.addEventListener('change', update);
+          checkboxes.push(checkbox);
+        }
 
         // Call when someone clicks on a checkbox and changes the selection of markers to be displayed
         function update() {
           var enabled = {};
-          for (var i = 0; i < checkboxes.length; i++) {
+          for (var i=0; i < checkboxes.length; i++) {
             if (checkboxes[i].checked) enabled[checkboxes[i].id] = true;
           }
-          dataLayer.setFilter(function(feature) {
-            return (feature.properties['Status'] in enabled);
-          });
+          enabledArr = Object.keys(enabled);
+          enabledArr.push('x'); // filter expects at least one value
+
+          map.setFilter('csvData', [
+            'match',
+            ['get', 'Status'],
+            enabledArr,
+            true,
+            false
+          ]);
         }
 
         var geocoder = new MapboxGeocoder({
