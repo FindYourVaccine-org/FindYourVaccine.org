@@ -58,7 +58,6 @@
   });
 
   function makeMap(csvData) {
-    var markers = [];
     var clickedStateId = null;
 
     csv2geojson.csv2geojson(csvData, {
@@ -126,8 +125,6 @@
 
         // When a click event occurs on a feature in the csvData layer, open a popup with description HTML from its properties.
         map.on('click', 'csvData', function (e) {
-          markers = map.queryRenderedFeatures({ layers: ['csvData'] });
-
           var coordinates = e.features[0].geometry.coordinates.slice();
 
           // set popup text
