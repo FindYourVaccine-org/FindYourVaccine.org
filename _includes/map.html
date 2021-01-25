@@ -66,28 +66,29 @@
       delimiter: ','
     }, function (err, data) {
       map.on('load', function () {
+        // Add the data source for later reference
+        map.addSource('data', {
+          'type': 'geojson',
+          'data': data,
+          'generateId': true // This ensures that all features have unique IDs
+        });
+
         // Add the data layer to the map
         map.addLayer({
           'id': 'csvData',
           'type': 'circle',
-          'source': {
-            'type': 'geojson',
-            'data': data
-          },
+          'source': 'data',
           'paint': {
             'circle-radius': 5,
             'circle-color': colors
           }
         });
 
-        // add hover 'target' layer
+        // add click 'target' layer
         map.addLayer({
           'id': 'clickData',
           'type': 'circle',
-          'source': {
-            'type': 'geojson',
-            'data': data
-          },
+          'source': 'data',
           'layout': {},
           'paint': {
             'circle-radius': 7,
@@ -102,29 +103,25 @@
           }
         });
 
-        // Show click layer for single marker when clicked
-        map.on('click', 'clickData', function (e) {
+        // When a click event occurs on a feature in the csvData layer, open a popup with description HTML from its properties.
+        map.on('click', 'csvData', function (e) {
+          // Show click layer for single marker when clicked
           if (e.features.length > 0) {
             if (clickedStateId) {
               map.setFeatureState(
-                { source: {'type': 'geojson', 'data': data},
+                { source: 'data',
                   id: clickedStateId },
                 { clicked: false }
               );
             }
-
             clickedStateId = e.features[0].id;
-
             map.setFeatureState(
-              { source: {'type': 'geojson', 'data': data},
+              { source: 'data',
                 id: clickedStateId },
               { clicked: true }
             );
           }
-        });
 
-        // When a click event occurs on a feature in the csvData layer, open a popup with description HTML from its properties.
-        map.on('click', 'csvData', function (e) {
           var coordinates = e.features[0].geometry.coordinates.slice();
 
           // set popup text
@@ -206,13 +203,15 @@
           enabledArr = Object.keys(enabled);
           enabledArr.push('x'); // filter expects at least one value
 
-          map.setFilter('csvData', [
+          var clickFilter = [
             'match',
             ['get', 'Status'],
             enabledArr,
             true,
             false
-          ]);
+          ];
+          map.setFilter('csvData', clickFilter);
+          map.setFilter('clickData', clickFilter);
         }
 
         var geocoder = new MapboxGeocoder({
