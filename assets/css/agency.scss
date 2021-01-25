@@ -119,6 +119,10 @@ button#locate-provider.btn-primary {
   width: 100vw;
 }
 
+.mapboxgl-ctrl-geocoder {
+  max-width: 10%;
+}
+
 /* Map filter styling */
 .filter-ui {
   background: #fff;
