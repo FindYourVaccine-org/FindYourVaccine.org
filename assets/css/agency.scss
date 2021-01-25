@@ -104,6 +104,15 @@ a {
   display: none !important;
 }
 
+// .btn-primary:active, .btn-primary:focus, .btn-primary:hover
+
+button#locate-provider.btn-primary {
+  &:active, &:focus {
+    background-color: white !important;
+    border-color: white !important;
+  }
+}
+
 // Maps
 #map {
   height: 70vh;

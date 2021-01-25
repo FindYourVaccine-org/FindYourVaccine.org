@@ -5,11 +5,32 @@
         <strong class='filter-header'>Filter providers by status:</strong>
       </nav>
     </div>
-    <!-- <table id="providers" class="table table-striped"></table> -->
   </div>
+  <table id="provider-table" class="table table-striped"></table>
 </center>
 
 <script>
+  var map;
+
+  // find near me
+  document.querySelector('#locate-provider').addEventListener('click', geolocate);
+  function geolocate(e) {
+    $(e.target).css('background-color','white');
+    $(e.target).html("<img src='assets/img/spinner.svg' />")
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(jumpToMap);
+    }
+  }
+
+  function jumpToMap(position) {
+    $('html,body').animate({scrollTop: $("a[name='providers']").offset().top},'slow');
+    map.flyTo({
+      center: [position.coords.longitude, position.coords.latitude],
+      zoom: 10 }
+    );
+  }
+
+
   var transformRequest = (url, resourceType) => {
     var isMapboxRequest =
       url.slice(8, 22) === "api.mapbox.com" ||
@@ -21,7 +42,7 @@
     };
   };
   mapboxgl.accessToken = 'pk.eyJ1IjoiZmluZHlvdXJ2YWNjaW5lIiwiYSI6ImNrano2b2FmczAxMmQyd3Biajg3Mmg2a2cifQ.oOyj-x2PbbQJ35Iza4RMnA';
-  var map = new mapboxgl.Map({
+  map = new mapboxgl.Map({
     container: 'map', // container id
     style: 'mapbox://styles/mapbox/light-v10', // stylesheet location
     center: [parseFloat("{{ page.lon }}"), parseFloat("{{ page.lat }}") ], // starting position
@@ -52,7 +73,7 @@
       dataType: "text",
       success: function (csvData) {
         makeMap(csvData);
-        makeTable(csvData);
+        // makeTable(csvData);
       }
     });
   });
@@ -230,7 +251,25 @@
   }
 
   function makeTable(csvData) {
+    var rows = Papa.parse(csvData).data;
 
+    var tBody = "<thead><tr>";
+    var headers = rows[0];
+    for (i=0; i<headers.length; i++) {
+      tBody += `<th>${headers[i]}</th>`;
+    }
+    tBody += "</tr></thead><tbody>";
+
+    for (i=1; i<rows.length; i++) {
+      tBody += "<tr>";
+      for (j=0; j<rows[i].length; j++) {
+        tBody += `<td>${rows[i][j]}</td>`;
+      }
+      tBody += "</tr>";
+    }
+
+    tBody += "</tbody>"
+    $("#provider-table").html(tBody);
   }
 
 </script>
