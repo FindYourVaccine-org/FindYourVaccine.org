@@ -4,7 +4,7 @@
       <div class="intro-lead-in">{{ site.data.sitetext.header.title | markdownify }}</div>
       <div class="intro-heading text-uppercase">{{ site.data.sitetext.header.text | markdownify }}</div>
       <select class="custom-select w-50" name="state" id="state" onchange="location = this.value;">
-        <option disabled selected value="">Select your state...</option>
+        <option disabled selected value="">{% t splash.state %}</option>
         {% for state in site.states %}
           <option value="{{ state.abbrev }}">{{ state.name }}</option>
         {% endfor %}

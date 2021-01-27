@@ -38,3 +38,8 @@ markdown: kramdown
 plugins:
   - jekyll-remote-theme
   - jekyll-sitemap
+  - jekyll-multiple-languages-plugin
+
+languages: ["en"]
+
+exclude_from_localizations: ["assets", "favicon.ico"]
