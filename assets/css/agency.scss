@@ -39,7 +39,7 @@ html body {
   #mainNav.navbar, #mainNav.navbar-shrink {
     background-color: inherit !important;
     .container {
-      @media (min-width: 768px) {
+      @media (min-width: 992px) {
         padding: 0 60px;
       }
     }
@@ -55,12 +55,22 @@ html body {
       width: 100%;
     }
     &.splash-container {
-      display: flex;
-      text-align: left;
-      .left, .right {
-        width: 50%;
-        padding: 60px;
+      .intro-text {
+        padding-bottom: 0;
+
       }
+      .right .intro-text {
+        padding-top: 30px;
+      }
+      @media (min-width: 992px) {
+        display: flex;
+        .left, .right {
+          width: 50%;
+          padding: 60px;
+        }
+      }
+      text-align: left;
+
       .right {
         img {
           width: 100%;
