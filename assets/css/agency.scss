@@ -36,6 +36,46 @@ $contact-image: "{{ site.data.style.contact-image }}";
 // Cam's CSS
 
 html body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  .masthead {
+    flex-grow: 1;
+    margin-top: 40px;
+  }
+  header.masthead .intro-text {
+    padding-top: 150px;
+  }
+  .footer2-wrapper {
+    background-color: #f2f2f2;
+  }
+  .footer2 {
+    padding: 25px;
+    @media (min-width: 992px) {
+      display: flex;
+      padding: 50px 0;
+    }
+    .items {
+      margin-right: 90px;
+      margin-bottom: 25px;
+    }
+    .footer-title {
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+    .footer-item {
+      margin-bottom: 16px;
+    }
+    .footer-item a {
+      color: black;
+      &:hover {
+        color: black;
+      }
+      img {
+        margin-left: 6px;
+      }
+    }
+  }
   #mainNav.navbar, #mainNav.navbar-shrink {
     background-color: inherit !important;
     .container {
@@ -44,10 +84,10 @@ html body {
       }
     }
   }
-    .navbar-nav .nav-item .nav-link {
-      color: black !important;
-      font-weight: 600 !important;
-    }
+  .navbar-nav .nav-item .nav-link {
+    color: black !important;
+    font-weight: 600 !important;
+  }
   .container {
     color: black;
 
@@ -57,7 +97,9 @@ html body {
     &.splash-container {
       .intro-text {
         padding-bottom: 0;
-
+        .header {
+          font-size: 25px;
+        }
       }
       .right .intro-text {
         padding-top: 30px;

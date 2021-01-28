@@ -17,10 +17,13 @@ footer:
     social:
       - url: https://twitter.com/findyourvaccine
         icon: "fab fa-twitter"
+        name: 'Twitter'
       - url: https://discord.gg/vFe5zPjJr8
         icon: fab fa-discord
+        name: 'Discord'
       - url: https://github.com/findyourvaccine/FindYourVaccine.org
         icon: "fab fa-github"
+        name: 'Github'
 
 
 # {{ site.data.sitetext.ex.ex | markdownify | default: example }}
