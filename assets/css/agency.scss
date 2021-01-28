@@ -33,6 +33,46 @@ $contact-image: "{{ site.data.style.contact-image }}";
 
 // Custom CSS
 
+// Cam's CSS
+
+html body {
+  #mainNav.navbar, #mainNav.navbar-shrink {
+    background-color: inherit !important;
+    .container {
+      @media (min-width: 768px) {
+        padding: 0 60px;
+      }
+    }
+  }
+    .navbar-nav .nav-item .nav-link {
+      color: black !important;
+      font-weight: 600 !important;
+    }
+  .container {
+    color: black;
+
+    .custom-select {
+      width: 100%;
+    }
+    &.splash-container {
+      display: flex;
+      text-align: left;
+      .left, .right {
+        width: 50%;
+        padding: 60px;
+      }
+      .right {
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+  }
+}
+
+// End Cam
+
 header.masthead .intro-text {
   padding-top: 150px;
 }
