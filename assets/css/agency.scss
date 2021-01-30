@@ -4,9 +4,10 @@
 // Core variables and mixins
 @import "base/variables.scss";
 @import "base/mixins.scss";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
 
 // Custom colors
-$primary: {{ site.data.style.highlight | default: "#fed136" }} !default;
+$primary: #0066CC;
 $white: {{ site.data.style.white | default: "#fff" }} !default;
 $black: {{ site.data.style.black | default: "#000" }} !default;
 
@@ -34,11 +35,19 @@ $contact-image: "{{ site.data.style.contact-image }}";
 // Custom CSS
 
 // Cam's CSS
+.fixed-position {
+  position: fixed;
+}
 
 html body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+  background-color: #fcfcfc;
+  h1, h2, h3, h4, p, a, li {
+    font-family: 'Roboto', sans-serif;
+  }
   .masthead {
     flex-grow: 1;
     margin-top: 40px;
@@ -50,10 +59,10 @@ html body {
     background-color: #f2f2f2;
   }
   .footer2 {
-    padding: 25px;
+    padding-top: 50px;
+    padding-bottom: 25px;
     @media (min-width: 992px) {
       display: flex;
-      padding: 50px 0;
     }
     .items {
       margin-right: 90px;
@@ -76,39 +85,83 @@ html body {
       }
     }
   }
+
   #mainNav.navbar, #mainNav.navbar-shrink {
     background-color: inherit !important;
-    .container {
-      @media (min-width: 992px) {
-        padding: 0 60px;
+    padding-left: 0;
+    padding-right: 0;
+    .navbar-toggler.navbar-toggler-right {
+      background-color: #fcfcfc;
+      color: black;
+      border: none;
+      font-size: 24px;
+      position: relative;
+      right: -10px;
+    }
+    .navbar-nav .nav-item .nav-link {
+      color: black !important;
+      font-weight: 600 !important;
+      font-size: 16px !important;
+      font-family: 'Roboto', sans-serif;
+      @media (max-width: 991px) {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+      &:hover {
+        @media (min-width: 992px) {
+          border-bottom: 2px solid black;
+        }
       }
     }
   }
-  .navbar-nav .nav-item .nav-link {
-    color: black !important;
-    font-weight: 600 !important;
-  }
+
   .container {
     color: black;
+    padding-left: inherit;
+    padding-right: inherit;
 
     .custom-select {
       width: 100%;
+      border-color: black;
+      color: black;
     }
     &.splash-container {
+      hr {
+        background-color: black;
+      }
+      .dropdown-label {
+        font-weight: 500;
+        font-size: 24px;
+      }
       .intro-text {
         padding-bottom: 0;
+        padding-top: 0px;
         .header {
-          font-size: 25px;
+          font-size: 32px;
+          @media (min-width: 992px) {
+            font-size: 48px;
+          }
+          margin-top: 40px;
+          margin-bottom: 64px;
+          padding-top: 20px;
         }
       }
       .right .intro-text {
         padding-top: 30px;
       }
+      .right {
+        padding-bottom: 40px;
+      }
       @media (min-width: 992px) {
         display: flex;
         .left, .right {
           width: 50%;
-          padding: 60px;
+        }
+        .left {
+          padding: 60px 60px 60px 0;
+        }
+        .right {
+          padding: 60px 0 60px 60px;
+
         }
       }
       text-align: left;
@@ -127,10 +180,6 @@ html body {
 
 header.masthead .intro-text {
   padding-top: 150px;
-}
-
-header.masthead .intro-text .intro-heading {
-  font-size: 25px;
 }
 
 @media(min-width:768px) {
