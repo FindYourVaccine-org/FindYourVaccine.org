@@ -50,6 +50,14 @@
   padding: 1%;
 }
 
+.mapboxgl-popup-content small {
+  padding-left: 5px;
+}
+
+.mapboxgl-popup-content p {
+  padding-left: 7px;
+}
+
 .mapboxgl-popup-content h3 {
   background: rgb(61, 59, 59);
   text-align: center;
