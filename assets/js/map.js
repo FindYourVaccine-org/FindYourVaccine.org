@@ -1,5 +1,7 @@
 var map;
 
+mapboxgl.accessToken = MAPBOX_TOKEN;
+
 var transformRequest = (url, resourceType) => {
   var isMapboxRequest =
     url.slice(8, 22) === "api.mapbox.com" ||
@@ -10,14 +12,6 @@ var transformRequest = (url, resourceType) => {
       : url
   };
 };
-mapboxgl.accessToken = MAPBOX_TOKEN;
-map = new mapboxgl.Map({
-  container: 'map', // container id
-  style: 'mapbox://styles/mapbox/light-v10', // stylesheet location
-  center: [parseFloat(CENTER_LON), parseFloat(CENTER_LAT) ], // starting position
-  zoom: 4, // starting zoom
-  transformRequest: transformRequest
-});
 
 var colors = [
   'match',
@@ -34,18 +28,34 @@ var colors = [
 var filters = document.getElementById('filters');
 
 $(document).ready(function () {
+  fetchSheet();
+});
+
+function fetchSheet() {
   $.ajax({
     type: "GET",
     url: `https://docs.google.com/spreadsheets/d/${GSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${GSHEET_NAME}`,
     dataType: "text",
     success: function (csvData) {
-      makeMap(csvData);
+      if (csvData.length > 0) {
+        makeMap(csvData);
+      } else {
+        setTimeout(function() { fetchSheet(); }, 2000);
+      }
     }
   });
-});
+}
 
 function makeMap(csvData) {
   var clickedStateId = null;
+
+  map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: 'mapbox://styles/mapbox/light-v10', // stylesheet location
+    center: [parseFloat(CENTER_LON), parseFloat(CENTER_LAT) ], // starting position
+    zoom: 4, // starting zoom
+    transformRequest: transformRequest
+  });
 
   csv2geojson.csv2geojson(csvData, {
     latfield: 'Lat',
