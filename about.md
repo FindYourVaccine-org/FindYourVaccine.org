@@ -36,8 +36,6 @@ Join us! We are a volunteer-based team. [Please reach out to us on the contact f
 
 - **Social Media Manager**: We are seeking one or more people with social media management experience to establish and run our social media presence. This includes our Twitter and Facebook presence, as well as any other platform engagements deemed necessary.
 
-- **UX/UI Designer**: Help us improve the experience of using our platform on both desktop and mobile platforms. Proficiency working with accessibility is a plus.
-
 - **Media/PR Coordinator**: We are seeking someone with Media and PR experience to manage media inquiries, press releases, interviews and other journalism engagements.
 
 
