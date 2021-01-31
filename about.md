@@ -28,7 +28,7 @@ Our updates on current appointment and vaccine availability status at each locat
 
 ### HOW TO GET INVOLVED
 
-Join us! We are a volunteer-based team. [Please reach out to us on the contact form, and indicate your interest in one or more of the open roles.](https://docs.google.com/forms/d/e/1FAIpQLScGb49aeBfUVZEclKEtj9NYEYPC5UkVIBdNO3gY5y0WWaQkpw/viewform) As opportunities become available to support our efforts, they will be placed below:
+Join us! We are a volunteer-based team. [Please reach out to us on the volunteer form, and indicate your interest in one or more of the open roles.](/volunteer) As specific opportunities become available to support our efforts, they will be placed below:
 
 - **Outreach Coordinator**: You take responsibility for coordinating the daily calling efforts for one or more states. You have a passion for organization, you keep the train moving, and you love to build a team. You are available for an estimate  of 30 minutes to 1 hr per day.
 
