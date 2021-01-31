@@ -39,6 +39,7 @@ function fetchSheet() {
     success: function (csvData) {
       if (csvData.length > 0) {
         makeMap(csvData);
+        makeCards(csvData);
       } else {
         setTimeout(function() { fetchSheet(); }, 2000);
       }
@@ -225,4 +226,20 @@ function makeMap(csvData) {
 
     });
   });
+}
+
+function makeCards(csvData) {
+  var rows = Papa.parse(csvData).data;
+  var keys = rows[0];
+  data = [];
+  for (i=1; i<rows.length; i++) {
+    var entry = {};
+    for (j=0; j<rows[i].length; j++) {
+      entry[keys[j]] = rows[i][j];
+    }
+    data.push(Object.assign({}, entry));
+  }
+
+  // TODO: fill data into cards:
+  // $("#provider-cards").html(data);
 }
