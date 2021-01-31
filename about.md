@@ -45,7 +45,7 @@ A note on roles and opportunities: We understand the challenge in taking on thes
 
 ### CONTACT US
 
-We welcome contact, coordination and partnership with government agencies, public/private healthcare providers, and similar data-sharing efforts. [Please reach out to us through the contact form here](https://docs.google.com/forms/d/e/1FAIpQLScGb49aeBfUVZEclKEtj9NYEYPC5UkVIBdNO3gY5y0WWaQkpw/viewform) or at [info@findyourvaccine.org](mailto:info@findyourvaccine.org) for any of the following:
+We welcome contact, coordination and partnership with government agencies, public/private healthcare providers, and similar data-sharing efforts. [Please reach out to us through the contact form here](/contact) or at [info@findyourvaccine.org](mailto:info@findyourvaccine.org) for any of the following:
 
 - Federal, state or local government entities looking to contact us, coordinate with us, or partner with us
 - Public or private vaccine providers looking to contact us, coordinate with us, or partner with us
