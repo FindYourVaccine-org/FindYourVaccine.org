@@ -1,14 +1,20 @@
 <header class="masthead">
-  <div class="container">
-    <div class="intro-text">
-      <div class="intro-lead-in">{{ site.data.sitetext.header.title | markdownify }}</div>
-      <div class="intro-heading text-uppercase">{{ site.data.sitetext.header.text | markdownify }}</div>
-      <select class="custom-select w-50" name="state" id="state" onchange="location = this.value;">
-        <option disabled selected value="">Select your state...</option>
-        {% for state in site.states %}
+  <div class="container splash-container">
+    <div class="left">
+      <div class="intro-text">
+        <h1 class="header">{{ site.data.sitetext.header.title | markdownify }}</h1>
+        <hr />
+        <div class="dropdown-label">{{ site.data.sitetext.header.text | markdownify }}</div>
+        <select class="custom-select" name="state" id="state" onchange="location = this.value;">
+          <option disabled selected value="">Select your state...</option>
+          {% for state in site.states %}
           <option value="{{ state.abbrev }}">{{ state.name }}</option>
-        {% endfor %}
-      </select>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="right">
+      <div class="intro-text"><img src="assets/img/custom/desktop/image_3x.png" /></div>
     </div>
   </div>
 </header>

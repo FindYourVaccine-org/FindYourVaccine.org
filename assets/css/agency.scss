@@ -4,9 +4,10 @@
 // Core variables and mixins
 @import "base/variables.scss";
 @import "base/mixins.scss";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
 
 // Custom colors
-$primary: {{ site.data.style.highlight | default: "#fed136" }} !default;
+$primary: #0066CC;
 $white: {{ site.data.style.white | default: "#fff" }} !default;
 $black: {{ site.data.style.black | default: "#000" }} !default;
 
@@ -33,12 +34,153 @@ $contact-image: "{{ site.data.style.contact-image }}";
 
 // Custom CSS
 
-header.masthead .intro-text {
-  padding-top: 150px;
+// Cam's CSS
+.fixed-position {
+  position: fixed;
 }
 
-header.masthead .intro-text .intro-heading {
-  font-size: 25px;
+html body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+  background-color: #fcfcfc;
+  h1, h2, h3, h4, p, a, li {
+    font-family: 'Roboto', sans-serif;
+  }
+  .masthead {
+    flex-grow: 1;
+    margin-top: 40px;
+  }
+  header.masthead .intro-text {
+    padding-top: 150px;
+  }
+  .footer2-wrapper {
+    background-color: #f2f2f2;
+  }
+  .footer2 {
+    padding-top: 50px;
+    padding-bottom: 25px;
+    @media (min-width: 992px) {
+      display: flex;
+    }
+    .items {
+      margin-right: 90px;
+      margin-bottom: 25px;
+    }
+    .footer-title {
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+    .footer-item {
+      margin-bottom: 16px;
+    }
+    .footer-item a {
+      color: black;
+      &:hover {
+        color: black;
+      }
+      img {
+        margin-left: 6px;
+      }
+    }
+  }
+
+  #mainNav.navbar, #mainNav.navbar-shrink {
+    background-color: inherit !important;
+    // padding-left: 0;
+    // padding-right: 0;
+    .navbar-toggler.navbar-toggler-right {
+      background-color: #fcfcfc;
+      color: black;
+      border: none;
+      font-size: 24px;
+      position: relative;
+      right: -10px;
+    }
+    .navbar-nav .nav-item .nav-link {
+      color: black !important;
+      font-weight: 600 !important;
+      font-size: 16px !important;
+      font-family: 'Roboto', sans-serif;
+      @media (max-width: 991px) {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+      &:hover {
+        @media (min-width: 992px) {
+          border-bottom: 2px solid black;
+        }
+      }
+    }
+  }
+
+  .container {
+    color: black;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    .custom-select {
+      width: 100%;
+      border-color: black;
+      color: black;
+    }
+    &.splash-container {
+      hr {
+        background-color: black;
+      }
+      .dropdown-label {
+        font-weight: 500;
+        font-size: 24px;
+      }
+      .intro-text {
+        padding-bottom: 0;
+        padding-top: 0px;
+        .header {
+          font-size: 32px;
+          margin-bottom: 40px;
+          @media (min-width: 992px) {
+            font-size: 48px;
+            margin-bottom: 64px;
+          }
+          margin-top: 40px;
+          padding-top: 20px;
+        }
+      }
+      .right .intro-text {
+        padding-top: 30px;
+      }
+      .right {
+        padding-bottom: 40px;
+      }
+      @media (min-width: 992px) {
+        display: flex;
+        .left, .right {
+          width: 50%;
+        }
+        .left {
+          padding: 60px 60px 60px 0;
+        }
+        .right {
+          padding: 60px 0 60px 60px;
+
+        }
+      }
+      text-align: left;
+
+      .right {
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+  }
+}
+
+// End Cam
+
+header.masthead .intro-text {
+  padding-top: 150px;
 }
 
 @media(min-width:768px) {
