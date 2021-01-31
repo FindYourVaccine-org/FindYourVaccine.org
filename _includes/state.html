@@ -22,10 +22,6 @@
       </div>
     {% endif %}
 
-    <div id="status" class="invisible">
-      <br />
-      As of <strong id="date"></strong>, {{ page.name }} COVID-19 vaccine distribution has entered <strong id="phase"></strong>.
-    </div>
     <small>
       Last updated: 
       <span id="updated"></span>
@@ -103,11 +99,20 @@
       State hotline: 
       <span id="hotline"></span>
     </div>
-    <small>
-      <a href='/report'>Submit a correction</a>
-    </small>
+
+    <div id="status" class="invisible">
+      <br />
+      As of <strong id="date"></strong>, {{ page.name }} COVID-19 vaccine distribution has entered <strong id="phase"></strong>.
+    </div>
+
+    <br />
+    <a href='/report'>
+      <button class="button btn btn-secondary">
+      Submit a correction
+      </button>
+    </a>
   </center>
-  <br /><br />
+  <br />
 </div>
 
 {{ content }}
