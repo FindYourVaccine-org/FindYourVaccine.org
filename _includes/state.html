@@ -8,24 +8,6 @@
         <img src="assets/img/spinner.svg" />
       </span>
     </div>
-    {% if page.lat %}
-      <div>
-        <br />
-        For a map of current vaccine providers in {{ page.name }}, <a href="#providers">click here</a>.<br />
-        <button id="locate-provider" class="btn btn-primary">Find a provider near me</button>
-      </div>
-    {% else %}
-      <div id="hold-providers-link" class="invisible">
-        <br />
-        For a current list of vaccine providers, visit:<br />
-        <span id="providers-link"></span>
-      </div>
-    {% endif %}
-
-    <small>
-      Last updated: 
-      <span id="updated"></span>
-    </small>
   </div>
 
   <div class="card card-thin mx-auto invisible" id="hold-currently-eligible">
@@ -33,16 +15,31 @@
       <h4>Am I eligible?</h4>
       You are currently eligible if you belong to any of the following groups:<br />
       <span id="currently-eligible"></span>
+
+      <center>
+      {% if page.lat %}
+        <a href="#providers">
+          <button class="btn btn-primary">View provider availability map</button>
+        </a>
+      {% else %}
+        <div id="hold-providers-link" class="invisible">
+          <br />
+          For a current list of vaccine providers, visit:<br />
+          <span id="providers-link"></span>
+        </div>
+      {% endif %}
+      </center>
+
     </div>
   </div>
 
   <div class="card card-wide mx-auto invisible" id="hold-eligible">
     <div class="card-body">
       <h4>I'm eligible. How do I get the vaccine?</h4>
-      <small id="hold-eligible-notes" class="invisible">
+      <p id="hold-eligible-notes" class="invisible">
         <strong>Notes: </strong>
         <span id="eligible-notes"></span>
-      </small>
+      </p>
       <table>
         <tr><th>Group</th><th>Instructions</th></tr>
         <tr>
@@ -64,10 +61,10 @@
   <div class="card card-thin mx-auto invisible" id="hold-not-eligible">
     <div class="card-body">
       <h4>I'm not eligible yet. When can I get the vaccine?</h4>
-      <small id="hold-not-eligible-notes" class="invisible">
+      <p id="hold-not-eligible-notes" class="invisible">
         <strong>Notes: </strong>
         <span id="not-eligible-notes"></span>
-      </small>
+      </p>
       <table id="not-eligible-phases" class="invisible">
         <tr><th>Group</th><th>Timeline</th></tr>
         <tr>
@@ -106,6 +103,11 @@
     </div>
 
     <br />
+    <small>
+      Last updated: 
+      <span id="updated"></span>
+    </small>
+    <br />
     <a href='/report'>
       <button class="button btn btn-secondary">
       Submit a correction
@@ -119,6 +121,9 @@
 
 <a name="providers"></a>
 {% if page.lat %}
+  <center>
+    <button id="locate-provider" class="btn btn-primary">Find a provider near me</button><br /><br />
+  </center>
   {% include map.html %}
 {% endif %}
 
