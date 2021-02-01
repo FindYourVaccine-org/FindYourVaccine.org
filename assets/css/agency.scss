@@ -86,14 +86,13 @@ html body {
   }
 
   #mainNav.navbar {
-    font-family: "Space Grotesk", Arial, sans-serif;
-    font-weight: 700;
-
     .wordmark {
       margin-bottom: 5px;
     }
 
     .navbar-brand {
+      font-family: "Space Grotesk", Arial, sans-serif;
+      font-weight: 700;
       font-size: 1.5em;
       .org {
         font-size: .6em;
