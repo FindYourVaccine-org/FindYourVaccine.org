@@ -16,11 +16,8 @@
   z-index: 100;
   text-align: left;
   padding: 10px;
-  border-radius: 3px;
-
-  .filter-header {
-    line-height: 2em;
-  }
+  border-radius: 8px;
+  box-shadow: 1px 1px 10px #666;
 }
 
 .filter-label {
