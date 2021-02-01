@@ -34,7 +34,6 @@ $contact-image: "{{ site.data.style.contact-image }}";
 
 // Custom CSS
 
-// Cam's CSS
 .fixed-position {
   position: fixed;
 }
@@ -88,6 +87,16 @@ html body {
 
   #mainNav.navbar, #mainNav.navbar-shrink {
     background-color: inherit !important;
+
+    .navbar-brand {
+      font-family: "Space Grotesk", Arial, sans-serif;
+      font-weight: 700;
+      font-size: 1.5em;
+      .org {
+        font-size: .6em;
+      }
+    }
+
     .navbar-toggler.navbar-toggler-right {
       background-color: #fcfcfc;
       color: black;
@@ -174,8 +183,6 @@ html body {
     }
   }
 }
-
-// End Cam
 
 header.masthead .intro-text {
   padding-top: 150px;
