@@ -99,9 +99,12 @@ html body {
         font-size: .6em;
       }
     }
-    &.navbar-shrink {
-      .navbar-brand {
-        font-size: 1em;
+
+    @media(min-width:992px) {
+      &.navbar-shrink {
+        .navbar-brand {
+          font-size: 1em;
+        }
       }
     }
   }
