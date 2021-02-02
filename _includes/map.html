@@ -1,8 +1,20 @@
 <div id="map">
   <nav id='filters' class='filter-ui'>
-    <strong class='filter-header'>Filter providers by status:</strong>
-    <input type="checkbox" class="netliva-switch" netliva-switch id="Available">
-    <label class="filter-label" for="Available">Available for eligible</label>
+    <span class="dot" style="background-color:#019071"></span>
+    <label class="filter-label" for="Available for eligible">Vaccine available for those eligible</label>
+    <input type="checkbox" netliva-switch id="Available for eligible"><br />
+
+    <span class="dot" style="background-color:#dfc27d"></span>
+    <label class="filter-label" for="Have vaccine, no appointments">No appointments available</label>
+    <input type="checkbox" netliva-switch id="Have vaccine, no appointments"><br />
+
+    <span class="dot" style="background-color:#b0611a"></span>
+    <label class="filter-label" for="No vaccine available">Vaccine unavailable</label>
+    <input type="checkbox" netliva-switch id="No vaccine available"><br />
+
+    <span class="dot" style="background-color:#666"></span>
+    <label class="filter-label" for="Unknown">No data on location</label>
+    <input type="checkbox" netliva-switch id="Unknown"><br />
   </nav>
 </div>
 
