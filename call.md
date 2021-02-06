@@ -88,7 +88,7 @@ $(document).ready(function () {
       var prefills = `prefill_Location=${data['Name']}&prefill_Caller=${data['Caller']}`;
 
       // Add iframe to the page
-      const frame = `<iframe id="iframe" class="airtable-embed" src="https://app.miniextensions.com/form/wLnwdAmMKlp6nzJrXabw?${prefills}" frameborder="0" onmousewheel="" width="100%" height="1600px" style="background: transparent; border: 1px solid #ccc;"></iframe>`;
+      const frame = `<iframe id="iframe" class="airtable-embed" src="https://app.miniextensions.com/form/wLnwdAmMKlp6nzJrXabw?${prefills}" frameborder="0" onmousewheel="" width="100%" height="1800px" style="background: transparent; border: 1px solid #ccc;"></iframe>`;
       $(frame).appendTo('#iframe-holder');
 
       var iloads = 0;
