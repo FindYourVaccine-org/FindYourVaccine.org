@@ -30,13 +30,50 @@ title: Call a provider
   </div>
 </div>
 
+<div id="modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <center>
+      <div class="modal-body">
+        <div id="modal-text">
+          <br />Sorry, we don't recognize that URL. Please double-check the link emailed to you!
+        </div>
+        <br /><button id="modal-cta" type="button" class="btn btn-primary" data-dismiss="modal" onclick="redirect();">Call another provider</button>
+      </div>
+      </center>
+    </div>
+  </div>
+</div>
+
 <script>
+const ctas = [
+  "Nice.",
+  "Woohoo!",
+  "Great job.",
+  "Thank you!",
+  "Wonderful."
+];
+
+var url = window.location.href;
+const callRegex = /calls\=[0-9]/g;
+
+
+function redirect() {
+  window.location.replace(url);
+}
+
 $(document).ready(function () {
   const id = window.location.search.split('=')[1];
   $.ajax({
     type: "GET",
     url: `https://rpy77zbl3f.execute-api.us-east-2.amazonaws.com/default/getProvider?id=${id}`,
     success: function (data) {
+      if (data == null) {
+        $('#modal-cta').hide();
+        $('#modal').modal({backdrop: 'static'});
+        return;
+      }
+
       // Add provider details
       $("#name").text(data['Name']);
       $("#phone").text("Call: " + data['Phone']);
@@ -54,9 +91,26 @@ $(document).ready(function () {
       const frame = `<iframe id="iframe" class="airtable-embed" src="https://app.miniextensions.com/form/wLnwdAmMKlp6nzJrXabw?${prefills}" frameborder="0" onmousewheel="" width="100%" height="1600px" style="background: transparent; border: 1px solid #ccc;"></iframe>`;
       $(frame).appendTo('#iframe-holder');
 
-      // $("#iframe").load(function(){
-      //   console.log("LOAD");
-      // });
+      var iloads = 0;
+      $("#iframe").on('load', function() {
+        iloads++;
+        callsMade = 1;
+        if (iloads > 1) {
+          const urlParams = new URLSearchParams(window.location.search);
+          if (urlParams.get('calls')) {
+            callsMade = parseInt(urlParams.get('calls')) + 1;
+            url = url.replace(callRegex, 'calls='+callsMade);
+          } else {
+            url += '&calls=1';
+          }
+          var cta = ctas[Math.floor(Math.random()*ctas.length)];
+          cta += ` You've made ${callsMade} call`
+          if (callsMade > 1) { cta += 's'; }
+          cta += " so far. Keep up the good work!";
+          $('#modal-text').html(cta);
+          $('#modal').modal({backdrop: 'static'});
+        }
+      });
 
     }
   });
