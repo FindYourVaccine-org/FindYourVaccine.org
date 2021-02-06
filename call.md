@@ -54,19 +54,26 @@ const ctas = [
   "Wonderful."
 ];
 
-var url = window.location.href;
 const callRegex = /calls\=[0-9]/g;
+const stateRegex = /state\=[A-Z]/g;
 
+const urlParams = new URLSearchParams(window.location.search);
+var url = window.location.href;
 
 function redirect() {
   window.location.replace(url);
 }
 
 $(document).ready(function () {
-  const id = window.location.search.split('=')[1];
+  const ID = urlParams.get('id');
+  const STATES = urlParams.get('states');
+  const CALLS = urlParams.get('calls');
+
+  var lambdaUrl = `https://rpy77zbl3f.execute-api.us-east-2.amazonaws.com/default/getProvider?id=${ID}`;
+  if (STATES) { lambdaUrl += `&states=${STATES}`; }
+
   $.ajax({
-    type: "GET",
-    url: `https://rpy77zbl3f.execute-api.us-east-2.amazonaws.com/default/getProvider?id=${id}`,
+    type: "GET", url: lambdaUrl,
     success: function (data) {
       if (data == null) {
         $('#modal-cta').hide();
@@ -96,9 +103,8 @@ $(document).ready(function () {
         iloads++;
         callsMade = 1;
         if (iloads > 1) {
-          const urlParams = new URLSearchParams(window.location.search);
-          if (urlParams.get('calls')) {
-            callsMade = parseInt(urlParams.get('calls')) + 1;
+          if (CALLS) {
+            callsMade = parseInt(CALLS) + 1;
             url = url.replace(callRegex, 'calls='+callsMade);
           } else {
             url += '&calls=1';
