@@ -36,7 +36,10 @@ title: Call a provider
       <center>
       <div class="modal-body">
         <div id="modal-text">
-          <br />Sorry, we don't recognize that URL. Please double-check the link emailed to you!
+          <br /><strong>Sorry, we don't recognize that URL. Please double-check the link emailed to you!</strong><br /><br />
+          Forgot your URL? Resend the link:<br />
+          <input type="text" id="email" name="email" placeholder="Your email address">
+          <button id="resend" class="btn btn-sm btn-primary" onclick="resend();">Resend link</button>
         </div>
         <br /><button id="modal-cta" type="button" class="btn btn-primary" data-dismiss="modal" onclick="redirect();">Call another provider</button>
       </div>
@@ -64,6 +67,22 @@ function redirect() {
   window.location.replace(url);
 }
 
+function resend() {
+  var email = $("#email").val();
+  var resendBtn = $("#resend");
+  resendBtn.text("Sending...");
+  resendBtn.prop('disabled', true);
+  $.ajax({
+    url: "https://85wa3k3bl5.execute-api.us-east-2.amazonaws.com/default/sendVolunteerURL",
+    type: "POST",
+    headers: {'Access-Control-Allow-Origin': '*'},
+    data: JSON.stringify({email: email}),
+    contentType: "application/json",
+    dataType:"json",
+    success: function (data) { resendBtn.text("Sent!"); }
+  });
+}
+
 $(document).ready(function () {
   const ID = urlParams.get('id');
   const STATES = urlParams.get('states');
@@ -72,8 +91,7 @@ $(document).ready(function () {
   var lambdaUrl = `https://rpy77zbl3f.execute-api.us-east-2.amazonaws.com/default/getProvider?id=${ID}`;
   if (STATES) { lambdaUrl += `&states=${STATES}`; }
 
-  $.ajax({
-    type: "GET", url: lambdaUrl,
+  $.get(lambdaUrl, {
     success: function (data) {
       if (data == null) {
         $('#modal-cta').hide();
