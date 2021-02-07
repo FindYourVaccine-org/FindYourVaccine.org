@@ -91,7 +91,9 @@ $(document).ready(function () {
   var lambdaUrl = `https://rpy77zbl3f.execute-api.us-east-2.amazonaws.com/default/getProvider?id=${ID}`;
   if (STATES) { lambdaUrl += `&states=${STATES}`; }
 
-  $.get(lambdaUrl, {
+  $.ajax({
+    url: lambdaUrl,
+    type: "GET",
     success: function (data) {
       if (data == null) {
         $('#modal-cta').hide();
