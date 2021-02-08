@@ -73,12 +73,8 @@ function resend() {
   resendBtn.text("Sending...");
   resendBtn.prop('disabled', true);
   $.ajax({
-    url: "https://85wa3k3bl5.execute-api.us-east-2.amazonaws.com/default/sendVolunteerURL",
-    type: "POST",
-    headers: {'Access-Control-Allow-Origin': '*'},
-    data: JSON.stringify({email: email}),
-    contentType: "application/json",
-    dataType:"json",
+    url: `https://85wa3k3bl5.execute-api.us-east-2.amazonaws.com/default/sendVolunteerURL?email=${email}`,
+    type: "GET",
     success: function (data) { resendBtn.text("Sent!"); }
   });
 }
