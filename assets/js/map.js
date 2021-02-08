@@ -126,8 +126,20 @@ function makeMap(csvData) {
 
         var description = `<h3>${ps.Name}</h3>`;
 
-        if (ps.Summary) {
-          description += `<small>Last updated: ${ps['Last Contacted']}</small>${converter.makeHtml(ps.Summary)}`;
+        if (ps['Last Contacted']) {
+          description += `<small>Last updated: ${ps['Last Contacted']}</small>`;
+        }
+
+        if (ps['Last external notes']) {
+          description += `${converter.makeHtml(ps['Last external notes'])}`;
+        }
+
+        if (ps['Last restrictions']) {
+          description += `<h4><b>Restrictions: </b>${ps['Last restrictions']}</h4>`;
+        }
+
+        if (ps['Last appointment instructions']) {
+          description += `<h4><b>Appointment instructions: </b>${converter.makeHtml(ps['Last appointment instructions'])}</h4>`;
         }
 
         description += `<h4><b>Address: </b>${ps.Address}</h4>`;
