@@ -68,21 +68,25 @@
   type="text/css"
   />
 
-  <link href="/assets/css/map.css" rel="stylesheet" />
-  <script>
-    const MAPBOX_TOKEN = 'pk.eyJ1IjoiZmluZHlvdXJ2YWNjaW5lIiwiYSI6ImNrano2b2FmczAxMmQyd3Biajg3Mmg2a2cifQ.oOyj-x2PbbQJ35Iza4RMnA';
-    const GSHEET_ID = '1124pvazfFxhHkfFldcdrhSoh8DlpPwu0QvUskupEiG0';
-    // set GSHEET_NAME and lat/lon for specific state
-    const GSHEET_NAME = "{{ page.abbrev }}";
-    const CENTER_LAT = `{{ page.lat }}`;
-    const CENTER_LON = `{{ page.lon }}`;
-  </script>
-  <script async src="/assets/js/map.js"></script>
+    {% if page.lat %}
+    <link href="/assets/css/map.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/netliva_switch.css" />
 
-  <script src="assets/js/papaparse.min.js"></script>
-  <script src="assets/js/showdown.min.js"></script>
+    <script>
+      const MAPBOX_TOKEN = 'pk.eyJ1IjoiZmluZHlvdXJ2YWNjaW5lIiwiYSI6ImNrano2b2FmczAxMmQyd3Biajg3Mmg2a2cifQ.oOyj-x2PbbQJ35Iza4RMnA';
+      const GSHEET_ID = '1124pvazfFxhHkfFldcdrhSoh8DlpPwu0QvUskupEiG0';
+      // set GSHEET_NAME and lat/lon for specific state
+      const GSHEET_NAME = "{{ page.abbrev }}";
+      const CENTER_LAT = `{{ page.lat }}`;
+      const CENTER_LON = `{{ page.lon }}`;
+    </script>
+    <script async src="/assets/js/map.js"></script>
 
-  <script src="assets/js/fancyTable.min.js"></script>
+    <script src="assets/js/papaparse.min.js"></script>
+    <script src="assets/js/showdown.min.js"></script>
+    <script src="assets/js/netliva_switch.js"></script>
+    {% endif %}
+
   {% endif %}
 
   <!-- Page container change top padding when nav shrinks -->
