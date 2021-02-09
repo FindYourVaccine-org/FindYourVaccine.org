@@ -8,6 +8,10 @@
 }
 
 /* Map filter styling */
+#filters {
+  display: none;
+}
+
 .filter-ui {
   background: #fff;
   position: absolute;

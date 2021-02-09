@@ -63,6 +63,8 @@ function makeMap(csvData) {
     delimiter: ','
   }, function (err, data) {
     map.on('load', function () {
+      $('#filters').show();
+
       // Add the data source for later reference
       map.addSource('data', {
         'type': 'geojson',
