@@ -1,39 +1,56 @@
-<div id="map">
-  <nav id='filters' class='filter-ui'>
-    <span class="dot" style="background-color:#019071"></span>
-    <label class="filter-label" for="Available for eligible">Vaccine available for those eligible</label>
-    <input type="checkbox" netliva-switch id="Available for eligible"><br />
-
-    <span class="dot" style="background-color:#dfc27d"></span>
-    <label class="filter-label" for="Have vaccine, no appointments">No appointments available</label>
-    <input type="checkbox" netliva-switch id="Have vaccine, no appointments"><br />
-
-    <span class="dot" style="background-color:#b0611a"></span>
-    <label class="filter-label" for="No vaccine available">Vaccine unavailable</label>
-    <input type="checkbox" netliva-switch id="No vaccine available"><br />
-
-    <span class="dot" style="background-color:#666"></span>
-    <label class="filter-label" for="Unknown">No data on location</label>
-    <input type="checkbox" netliva-switch id="Unknown"><br />
+<div id="map" class="map-legend">
+  <nav id="filters" class="filter-ui">
+    <div class="key-container">
+      <span class="dot" style="background-color: #019071"></span>
+      <label class="filter-label" for="Available for eligible"
+        >Vaccine available for those eligible</label
+      >
+      <div class="switch-container">
+        <input type="checkbox" netliva-switch id="Available for eligible" />
+      </div>
+    </div>
+    <div class="key-container">
+      <span class="dot" style="background-color: #dfc27d"></span>
+      <label class="filter-label" for="Have vaccine, no appointments"
+        >No appointments available</label
+      >
+      <div class="switch-container">
+        <input type="checkbox" netliva-switch id="Have vaccine, no appointments" />
+      </div>
+    </div>
+    <div class="key-container">
+      <span class="dot" style="background-color: #b0611a"></span>
+      <label class="filter-label" for="No vaccine available">Vaccine unavailable</label>
+      <div class="switch-container">
+        <input type="checkbox" netliva-switch id="No vaccine available" />
+      </div>
+    </div>
+    <div class="key-container">
+      <span class="dot" style="background-color: #666"></span>
+      <label class="filter-label" for="Unknown">No data on location</label>
+      <div class="switch-container">
+        <input type="checkbox" netliva-switch id="Unknown" />
+      </div>
+    </div>
   </nav>
 </div>
 
 <script>
   // find near me
-  document.querySelector('#locate-provider').addEventListener('click', geolocate);
+  document.querySelector("#locate-provider").addEventListener("click", geolocate);
   function geolocate(e) {
-    $(e.target).css('background-color','white');
-    $(e.target).html("<img src='assets/img/spinner.svg' />")
+    $(e.target).css("background-color", "white");
+    $(e.target).html("<img src='assets/img/spinner.svg' />");
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(jumpToMap);
     }
   }
 
   function jumpToMap(position) {
-    $('html,body').animate({scrollTop: $("a[name='providers']").offset().top},'slow');
+    $("html,body").animate({ scrollTop: $("a[name='providers']").offset().top }, "slow");
     map.flyTo({
       center: [position.coords.longitude, position.coords.latitude],
-      zoom: 10 }
-    );
+      zoom: 10,
+    });
   }
 </script>
