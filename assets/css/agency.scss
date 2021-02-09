@@ -34,6 +34,54 @@ $contact-image: "{{ site.data.style.contact-image }}";
 
 // Custom CSS
 
+// Card CSS
+
+.location-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 1px 1px 20px 2px rgba(0, 0, 0, 0.1);
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  .location-card__header {
+    padding: .5rem;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid gray;
+    .location-card__header-name {
+      font-size: 1.5rem;
+      font-weight: normal;
+    }
+    .location-card__header-county {
+      font-size: 14px;
+    }
+    .location-card__header-address {
+      font-size: 14px;
+      color: gray;
+    }
+  }
+  .location-card__body-section {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &.thirds {
+      .section {
+        flex-grow: 1;
+        padding: 12px;
+        border-right: 1px solid lightgray;
+      }
+    }
+    .location-card__body-section-icon {
+      margin-right: 8px;
+    }
+    .location-card__body-section-text {
+      flex-grow: 1;
+    }
+  }
+}
+
 // Cam's CSS
 .fixed-position {
   position: fixed;
