@@ -20,6 +20,10 @@
 
   <meta property="og:image" content="{{ site.url }}/assets/img/homepage.jpg" />
 
+  {% if page.title == 'Call a provider' %}
+    <meta name="robots" content="noindex nofollow">
+  {% endif %}
+
   <link rel="shortcut icon" href="/assets/img/favicon/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon/favicon-16x16.png">
@@ -43,7 +47,7 @@
   <!-- Custom fonts for this template -->
   <link href="assets/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-  <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Space+Grotesk" rel="stylesheet" type="text/css">
   <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 

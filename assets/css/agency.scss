@@ -134,6 +134,29 @@ html body {
     }
   }
 
+  #mainNav.navbar {
+    .wordmark {
+      margin-bottom: 5px;
+    }
+
+    .navbar-brand {
+      font-family: "Space Grotesk", Arial, sans-serif;
+      font-weight: 700;
+      font-size: 1.5em;
+      .org {
+        font-size: .6em;
+      }
+    }
+
+    @media(min-width:992px) {
+      &.navbar-shrink {
+        .navbar-brand {
+          font-size: 1em;
+        }
+      }
+    }
+  }
+
   #mainNav.navbar, #mainNav.navbar-shrink {
     background-color: inherit !important;
     .navbar-toggler.navbar-toggler-right {
@@ -223,8 +246,6 @@ html body {
   }
 }
 
-// End Cam
-
 header.masthead .intro-text {
   padding-top: 150px;
 }
@@ -258,6 +279,10 @@ a {
 
   .card-thin {
     width: 600px;
+  }
+
+  .card-med {
+    width: 800px;
   }
 
   .card-wide {

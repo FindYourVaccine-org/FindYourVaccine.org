@@ -28,15 +28,13 @@ Our updates on current appointment and vaccine availability status at each locat
 
 ### HOW TO GET INVOLVED
 
-Join us! We are a volunteer-based team. [Please reach out to us on the contact form, and indicate your interest in one or more of the open roles.](https://docs.google.com/forms/d/e/1FAIpQLScGb49aeBfUVZEclKEtj9NYEYPC5UkVIBdNO3gY5y0WWaQkpw/viewform) As opportunities become available to support our efforts, they will be placed below:
+Join us! We are a volunteer-based team. [Please reach out to us on the volunteer form, and indicate your interest in one or more of the open roles.](/volunteer) As specific opportunities become available to support our efforts, they will be placed below:
 
 - **Outreach Coordinator**: You take responsibility for coordinating the daily calling efforts for one or more states. You have a passion for organization, you keep the train moving, and you love to build a team. You are available for an estimate  of 30 minutes to 1 hr per day.
 
 - **Outreach Volunteer**: You are the heart of this thing! You are matched with one or more state outreach coordinators, and you contact vaccine providers within that state for their current status updates. Your real-time updates go right onto the site. Preference will be given to folks who can commit to daily update sessions.
 
 - **Social Media Manager**: We are seeking one or more people with social media management experience to establish and run our social media presence. This includes our Twitter and Facebook presence, as well as any other platform engagements deemed necessary.
-
-- **UX/UI Designer**: Help us improve the experience of using our platform on both desktop and mobile platforms. Proficiency working with accessibility is a plus.
 
 - **Media/PR Coordinator**: We are seeking someone with Media and PR experience to manage media inquiries, press releases, interviews and other journalism engagements.
 
@@ -47,7 +45,7 @@ A note on roles and opportunities: We understand the challenge in taking on thes
 
 ### CONTACT US
 
-We welcome contact, coordination and partnership with government agencies, public/private healthcare providers, and similar data-sharing efforts. [Please reach out to us through the contact form here](https://docs.google.com/forms/d/e/1FAIpQLScGb49aeBfUVZEclKEtj9NYEYPC5UkVIBdNO3gY5y0WWaQkpw/viewform) or at [info@findyourvaccine.org](mailto:info@findyourvaccine.org) for any of the following:
+We welcome contact, coordination and partnership with government agencies, public/private healthcare providers, and similar data-sharing efforts. [Please reach out to us through the contact form here](/contact) or at [info@findyourvaccine.org](mailto:info@findyourvaccine.org) for any of the following:
 
 - Federal, state or local government entities looking to contact us, coordinate with us, or partner with us
 - Public or private vaccine providers looking to contact us, coordinate with us, or partner with us

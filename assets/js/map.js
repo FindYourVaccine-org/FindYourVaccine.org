@@ -1,5 +1,7 @@
 var map;
 
+mapboxgl.accessToken = MAPBOX_TOKEN;
+
 var transformRequest = (url, resourceType) => {
   var isMapboxRequest =
     url.slice(8, 22) === "api.mapbox.com" ||
@@ -10,14 +12,6 @@ var transformRequest = (url, resourceType) => {
       : url
   };
 };
-mapboxgl.accessToken = MAPBOX_TOKEN;
-map = new mapboxgl.Map({
-  container: 'map', // container id
-  style: 'mapbox://styles/mapbox/light-v10', // stylesheet location
-  center: [parseFloat(CENTER_LON), parseFloat(CENTER_LAT) ], // starting position
-  zoom: 4, // starting zoom
-  transformRequest: transformRequest
-});
 
 var colors = [
   'match',
@@ -34,18 +28,34 @@ var colors = [
 var filters = document.getElementById('filters');
 
 $(document).ready(function () {
+  fetchSheet();
+});
+
+function fetchSheet() {
   $.ajax({
     type: "GET",
     url: `https://docs.google.com/spreadsheets/d/${GSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${GSHEET_NAME}`,
     dataType: "text",
     success: function (csvData) {
-      makeMap(csvData);
+      if (csvData.length > 0) {
+        makeMap(csvData);
+      } else {
+        setTimeout(function() { fetchSheet(); }, 2000);
+      }
     }
   });
-});
+}
 
 function makeMap(csvData) {
   var clickedStateId = null;
+
+  map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: 'mapbox://styles/mapbox/light-v10', // stylesheet location
+    center: [parseFloat(CENTER_LON), parseFloat(CENTER_LAT) ], // starting position
+    zoom: 4, // starting zoom
+    transformRequest: transformRequest
+  });
 
   csv2geojson.csv2geojson(csvData, {
     latfield: 'Lat',
@@ -116,8 +126,20 @@ function makeMap(csvData) {
 
         var description = `<h3>${ps.Name}</h3>`;
 
-        if (ps.Summary) {
-          description += `<small>Last updated: ${ps['Last Contacted']}</small>${converter.makeHtml(ps.Summary)}`;
+        if (ps['Last Contacted']) {
+          description += `<small>Last updated: ${ps['Last Contacted']}</small>`;
+        }
+
+        if (ps['Last external notes']) {
+          description += `${converter.makeHtml(ps['Last external notes'])}`;
+        }
+
+        if (ps['Last restrictions']) {
+          description += `<h4><b>Restrictions: </b>${ps['Last restrictions']}</h4>`;
+        }
+
+        if (ps['Last appointment instructions']) {
+          description += `<h4><b>Appointment instructions: </b>${converter.makeHtml(ps['Last appointment instructions'])}</h4>`;
         }
 
         description += `<h4><b>Address: </b>${ps.Address}</h4>`;
