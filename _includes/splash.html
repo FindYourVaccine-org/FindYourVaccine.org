@@ -4,42 +4,6 @@
       <div class="intro-text">
         <h1 class="header">{{ site.data.sitetext.header.title | markdownify }}</h1>
         <hr />
-        <div class="location-card">
-          <div class="location-card__header">
-            <div>
-              <h1 class="location-card__header-name">VONS PHARMACY #2739</h1>
-              <div class="location-card__header-county">Los Angeles Country</div>
-              <div class="location-card__header-address">
-                8969 Santa Monica Blvd, West Hollywood, Ca 90069
-              </div>
-            </div>
-            <div>
-              <div class="location-card__header-last-updated">Updated 11 days ago</div>
-            </div>
-          </div>
-          <div class="location-card__body">
-            <div class="location-card__body-section thirds">
-              <div class="section">
-                <div class="icon"><i class="fa fa-check-circle"></i></div>
-                <div class="data">Vaccines reported available</div>
-              </div>
-              <div class="section">65 years old and up</div>
-              <div class="section">test</div>
-            </div>
-            <div class="location-card__body-section">
-              <div class="location-card__body-section-icon">
-                <i class="fa fa-calendar" aria-hidden="true"></i>
-              </div>
-              <div class="location-card__body-section-text">Vaccines reported available</div>
-            </div>
-            <div class="location-card__body-section">
-              <div class="location-card__body-section-icon">
-                <i class="fas fa-info-circle" aria-hidden="true"></i>
-              </div>
-              <div class="location-card__body-section-text">Vaccines reported available</div>
-            </div>
-          </div>
-        </div>
         <div class="dropdown-label">{{ site.data.sitetext.header.text | markdownify }}</div>
         <select class="custom-select" name="state" id="state" onchange="location = this.value;">
           <option disabled selected value="">Select your state...</option>
