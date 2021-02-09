@@ -179,24 +179,10 @@ function makeMap(csvData) {
       var bbox = turf.bbox(data);
       map.fitBounds(bbox, { padding: 50 });
 
-      var checkboxes = [];
-      // Create a filter interface.
-      // for (var i=0; i < types.length; i++) {
-      //   // Create an an input checkbox and label inside.
-      //   var item = filters.appendChild(document.createElement('div'));
-      //   var checkbox = item.appendChild(document.createElement('input'));
-      //   var label = item.appendChild(document.createElement('label'));
-      //   label.className = "filter-label";
-      //   checkbox.type = 'checkbox';
-      //   checkbox.id = types[i];
-      //   checkbox.checked = true;
-      //   // create a label to the right of the checkbox with explanatory text
-      //   label.innerHTML = types[i];
-      //   label.setAttribute('for', types[i]);
-      //   // Whenever a person clicks on this checkbox, call the update().
-      //   checkbox.addEventListener('change', update);
-      //   checkboxes.push(checkbox);
-      // }
+      var checkboxes = $('.map-filter-checkbox');
+      $.each(checkboxes, function(i, box) {
+        box.addEventListener('change', update);
+      });
 
       // Call when someone clicks on a checkbox and changes the selection of markers to be displayed
       function update() {
