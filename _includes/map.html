@@ -1,25 +1,28 @@
-<div id="map">
-  <nav id='filters' class='filter-ui'>
-    <strong class='filter-header'>Filter providers by status:</strong>
-  </nav>
+<div class="map-container">
+  <div id="provider-cards" class="cards-container"></div>
+  <div id="map">
+    <nav id="filters" class="filter-ui">
+      <strong class="filter-header">Filter providers by status:</strong>
+    </nav>
+  </div>
 </div>
 
 <script>
   // find near me
-  document.querySelector('#locate-provider').addEventListener('click', geolocate);
+  document.querySelector("#locate-provider").addEventListener("click", geolocate);
   function geolocate(e) {
-    $(e.target).css('background-color','white');
-    $(e.target).html("<img src='assets/img/spinner.svg' />")
+    $(e.target).css("background-color", "white");
+    $(e.target).html("<img src='assets/img/spinner.svg' />");
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(jumpToMap);
     }
   }
 
   function jumpToMap(position) {
-    $('html,body').animate({scrollTop: $("a[name='providers']").offset().top},'slow');
+    $("html,body").animate({ scrollTop: $("a[name='providers']").offset().top }, "slow");
     map.flyTo({
       center: [position.coords.longitude, position.coords.latitude],
-      zoom: 10 }
-    );
+      zoom: 10,
+    });
   }
 </script>
