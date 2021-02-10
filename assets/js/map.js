@@ -15,13 +15,21 @@ var colors = [
   "match",
   ["get", "Status"],
   "No vaccine available",
-  "#b0611a",
+  "#d7191c",
   "Have vaccine, no appointments",
-  "#dfc27d",
+  "#fdae61",
   "Available for eligible",
-  "#019071",
-  /* other */ "#666",
+  "#1a9641",
+  /* other */ "#92c5de",
 ];
+
+  // "No vaccine available",
+  // "#b0611a",
+  // "Have vaccine, no appointments",
+  // "#dfc27d",
+  // "Available for eligible",
+  // "#019071",
+  // /* other */ "#666",
 
 var filters = document.getElementById("filters");
 
