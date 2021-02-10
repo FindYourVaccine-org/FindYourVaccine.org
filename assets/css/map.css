@@ -9,6 +9,10 @@
 }
 
 /* Map filter styling */
+#filters {
+  display: none;
+}
+
 .filter-ui {
   background: #fff;
   position: absolute;
@@ -27,10 +31,25 @@
 .map-container {
   display: flex;
 }
+
 .cards-container {
   max-height: 70vh;
   overflow-y: auto;
   max-width: 35%;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 20px 2px rgba(0, 0, 0, 0.1);
+}
+
+.filter-ui label {
+  margin: 0;
+  flex-grow: 1;
+  font-size: 14px;
+}
+
+/* overrides default green */
+.filter-ui .key-container .netliva-switch input:checked + label {
+  --switch-active-color: #34c759;
 }
 
 .filter-label {
@@ -41,6 +60,27 @@
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.key-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.key-container:last-child {
+  margin-bottom: 0;
+}
+
+.key-container .switch-container {
+  text-align: right;
+  margin-left: 16px;
+}
+
+.dot {
+  height: 16px;
+  width: 16px;
+  margin-right: 8px;
+  flex-shrink: 0;
 }
 
 /* Map popup styling */

@@ -66,6 +66,8 @@ function makeMap(csvData) {
     },
     function (err, data) {
       map.on("load", function () {
+        $("#filters").show();
+
         // Add the data source for later reference
         map.addSource("data", {
           type: "geojson",
@@ -109,10 +111,16 @@ function makeMap(csvData) {
           // Show click layer for single marker when clicked
           if (e.features.length > 0) {
             if (clickedStateId) {
-              map.setFeatureState({ source: "data", id: clickedStateId }, { clicked: false });
+              map.setFeatureState(
+                { source: "data", id: clickedStateId },
+                { clicked: false }
+              );
             }
             clickedStateId = e.features[0].id;
-            map.setFeatureState({ source: "data", id: clickedStateId }, { clicked: true });
+            map.setFeatureState(
+              { source: "data", id: clickedStateId },
+              { clicked: true }
+            );
           }
 
           var coordinates = e.features[0].geometry.coordinates.slice();
@@ -158,7 +166,10 @@ function makeMap(csvData) {
           }
 
           // add popup to map
-          var popup = new mapboxgl.Popup().setLngLat(coordinates).setHTML(description).addTo(map);
+          var popup = new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML(description)
+            .addTo(map);
         });
 
         map.on("mouseenter", "csvData", function () {
@@ -172,35 +183,10 @@ function makeMap(csvData) {
         var bbox = turf.bbox(data);
         map.fitBounds(bbox, { padding: 50 });
 
-        // add status filters
-        var typesObj = {},
-          types = [];
-        for (var i = 0; i < data.features.length; i++) {
-          typesObj[data.features[i].properties["Status"]] = true;
-        }
-        for (var k in typesObj) {
-          types.push(k);
-        }
-        types.sort();
-
-        var checkboxes = [];
-        // Create a filter interface.
-        for (var i = 0; i < types.length; i++) {
-          // Create an an input checkbox and label inside.
-          var item = filters.appendChild(document.createElement("div"));
-          var checkbox = item.appendChild(document.createElement("input"));
-          var label = item.appendChild(document.createElement("label"));
-          label.className = "filter-label";
-          checkbox.type = "checkbox";
-          checkbox.id = types[i];
-          checkbox.checked = true;
-          // create a label to the right of the checkbox with explanatory text
-          label.innerHTML = types[i];
-          label.setAttribute("for", types[i]);
-          // Whenever a person clicks on this checkbox, call the update().
-          checkbox.addEventListener("change", update);
-          checkboxes.push(checkbox);
-        }
+        var checkboxes = $(".map-filter-checkbox");
+        $.each(checkboxes, function (i, box) {
+          box.addEventListener("change", update);
+        });
 
         // Call when someone clicks on a checkbox and changes the selection of markers to be displayed
         function update() {
@@ -211,7 +197,14 @@ function makeMap(csvData) {
           enabledArr = Object.keys(enabled);
           enabledArr.push("x"); // filter expects at least one value
 
-          var clickFilter = ["match", ["get", "Status"], enabledArr, true, false];
+          var clickFilter = [
+            "match",
+            ["get", "Status"],
+            enabledArr,
+            true,
+            false,
+          ];
+
           map.setFilter("csvData", clickFilter);
           map.setFilter("clickData", clickFilter);
         }
