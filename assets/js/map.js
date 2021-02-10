@@ -20,9 +20,10 @@ var colors = [
   "#fdae61",
   "Available for eligible",
   "#1a9641",
-  /* other */ "#92c5de",
+  /* other */ "#0571b0",
 ];
 
+  // TODO: add colorblind mode options
   // "No vaccine available",
   // "#b0611a",
   // "Have vaccine, no appointments",
