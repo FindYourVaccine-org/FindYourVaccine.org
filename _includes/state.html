@@ -118,11 +118,13 @@
       <span id="updated"></span>
     </small>
     <br />
+    {% if page.lat %}
     <a href='/feedback?state={{ page.name }}'>
       <button class="button btn btn-primary">
       Did this help? Let us know!
       </button>
     </a>
+    {% endif %}
     <a href='/report'>
       <button class="button btn btn-secondary">
       Submit a correction
