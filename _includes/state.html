@@ -7,6 +7,16 @@
       <span id="website">
         <img src="assets/img/spinner.svg" />
       </span>
+      {% if page.counties %}
+        <br /><br />
+        View county-specific information, where available:<br />
+        <select name="county" id="county" onchange="toggleCounty(this);">
+          <option disabled selected value="">Select your county...</option>
+        </select>
+        <div class="card card-med mx-auto" id="county-holder">
+          <div class="card-body" id="county-details"></div>
+        </div>
+      {% endif %}
     </div>
   </div>
 
@@ -108,6 +118,11 @@
       <span id="updated"></span>
     </small>
     <br />
+    <a href='/feedback?state={{ page.name }}'>
+      <button class="button btn btn-primary">
+      Did this help? Let us know!
+      </button>
+    </a>
     <a href='/report'>
       <button class="button btn btn-secondary">
       Submit a correction
@@ -138,11 +153,46 @@
       dataType: "text",
       success: function (csvData) { parseState(csvData, "{{ page.name }}"); }
     });
+
+    {% if page.counties %}
+      $.ajax({
+        type: "GET",
+        url: `https://docs.google.com/spreadsheets/d/{{page.counties}}/gviz/tq?tqx=out:csv&sheet=data`,
+        dataType: "text",
+        success: function (csvData) { parseCounties(csvData); }
+      });
+    {% endif %}
   });
 
   var converter = new showdown.Converter();
   converter.setOption('openLinksInNewWindow', true);
   converter.setOption('simplifiedAutoLink', true);
+
+  {% if page.counties %}
+    function parseCounties(csv) {
+      var rows = Papa.parse(csv).data;
+      for (i=1; i<rows.length; i++) {
+        $('#county').append($('<option>', {
+          value: rows[i][0],
+          text: rows[i][0],
+          disabled: rows[i][1].length == 0
+        }));
+        var markedRow = converter.makeHtml(rows[i][1]);
+        $('#county-details').append($('<div>', {
+          class: 'county-detail',
+          id: `county-${rows[i][0]}`,
+          html: `${rows[i][0]} County: ${markedRow}`
+        }))
+      }
+    }
+
+    function toggleCounty(selected) {
+      $('#county-holder').hide();
+      $('.county-detail').hide();
+      $(`#county-${selected.value}`).show();
+      $('#county-holder').show();
+    }
+  {% endif %}
 
   function parseState(csv, stateName) {
     var rows = Papa.parse(csv).data;

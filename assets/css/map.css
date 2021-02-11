@@ -83,6 +83,26 @@
   flex-shrink: 0;
 }
 
+.pin {
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  border-radius: 50% 50% 50% 0;
+  background: #ff0000;
+  position: absolute;
+  margin-top: -7px;
+}
+
+.pin:after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  margin: 4px 0 0 4px;
+  background: #fff;
+  opacity: 0.7;
+  position: absolute;
+  border-radius: 50%;
+}
 /* Map popup styling */
 .mapboxgl-popup {
   padding-bottom: 5px;
