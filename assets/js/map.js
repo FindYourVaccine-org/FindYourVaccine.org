@@ -66,7 +66,7 @@ function makeMap(csvData) {
             case "Available for eligible":
               el.className = "pin status-available"; el.style.background = "#1a9641"; break;
             default:
-              el.className = "pin status-unknown"; el.style.background = "#0571b0";
+              el.className = "pin status-unknown"; el.style.background = "#4a9ecf";
           };
 
           new mapboxgl.Marker(el)
