@@ -58,6 +58,7 @@ function makeMap(csvData) {
 
         data.features.forEach(function(pin) {
           var el = document.createElement('span');
+          el.id = pin.properties['ID'];
           switch(pin.properties['Status']) {
             case "No vaccine available":
               el.className = "pin status-no"; el.style.background = "#d7191c"; break;
@@ -72,7 +73,6 @@ function makeMap(csvData) {
           new mapboxgl.Marker(el)
             .setRotation(-45)
             .setLngLat(pin.geometry.coordinates)
-            .setPopup(new mapboxgl.Popup().setHTML(pin.properties['Name']))
             .addTo(map);
         });
 
@@ -83,8 +83,11 @@ function makeMap(csvData) {
         for (const name of ['available', 'no-appt', 'no', 'unknown']) {
           $(`#status-${name}`).on('change', function() {
             $(`.status-${name}`).toggle();
+            updateVisible();
           });
         }
+
+        map.on('moveend', function() { updateVisible(); });
 
         var geocoder = new MapboxGeocoder({
           accessToken: mapboxgl.accessToken,
@@ -115,9 +118,8 @@ function makeCards(csvData) {
 
   // TODO: fill data into cards:
   var cardsHtml = data.map((cardData) => {
-    console.log(cardData);
     return `
-    <div class="location-card">
+<div class="location-card" id="card-${cardData.ID}">
   <header class="card__header">
     <h1 class="card__title">${cardData.Name}</h1>
     <div class="card__addr">
@@ -144,7 +146,7 @@ function makeCards(csvData) {
       cardData["Last restrictions"]
     } /  ${cardData["Last external notes"]} / ${cardData["Summary"]}</div>
 </div>
-`;
+    `;
   });
   $("#provider-cards").html(cardsHtml);
 }
@@ -156,15 +158,17 @@ function intersectRect(r1, r2) {
     r2.bottom < r1.top);
 }
 
-function getVisiblePins() {
+function updateVisible() {
   var cc = map.getContainer();
   var els = cc.getElementsByClassName('pin');
   var ccRect = cc.getBoundingClientRect();
-  var visibles = [];
   for (var i=0; i < els.length; i++) {
     var el = els.item(i);
     var elRect = el.getBoundingClientRect();
-    intersectRect(ccRect, elRect) && visibles.push(el);
+    if (intersectRect(ccRect, elRect)) {
+      $(`#card-${el.id}`).show();
+    } else {
+      $(`#card-${el.id}`).hide();
+    }
   }
-  return visibles;
 }
