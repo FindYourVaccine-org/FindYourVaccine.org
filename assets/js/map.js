@@ -123,7 +123,7 @@ function makeCards(csvData) {
   <header class="card__header">
     <h1 class="card__title">${cardData.Name}</h1>
     <div class="card__addr">
-      <span>${cardData.Address}</span>
+      <span>${cardData.Address} <a target="_blank" href="https://www.google.com/maps/dir//${cardData.Name}, ${cardData.Address}"><i style="font-size:20px" class="material-icons">directions</i></a></span>
     </div>
   </header>
   <div class="card__middle">
@@ -149,6 +149,14 @@ function makeCards(csvData) {
     `;
   });
   $("#provider-cards").html(cardsHtml);
+
+  $('.location-card').mouseenter(function() {
+    const pinId = '#' + $(this).attr('id').replace('card-', '');
+    $(pinId).addClass('highlight-pin');
+  }).mouseleave(function() {
+    const pinId = '#' + $(this).attr('id').replace('card-', '');
+    $(pinId).removeClass('highlight-pin');
+  });
 }
 
 function intersectRect(r1, r2) {

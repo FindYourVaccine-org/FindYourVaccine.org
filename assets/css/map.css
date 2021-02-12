@@ -1,6 +1,5 @@
 #map {
   height: 70vh;
-  /* width: 100vw; */
   width: 100%;
 }
 
@@ -103,6 +102,11 @@
   position: absolute;
   border-radius: 50%;
 }
+
+.highlight-pin {
+  box-shadow: 0 0 12px 6px #0ff;
+}
+
 /* Map popup styling */
 .mapboxgl-popup {
   padding-bottom: 5px;
