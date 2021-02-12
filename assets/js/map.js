@@ -76,6 +76,12 @@ function makeMap(csvData) {
             .addTo(map);
         });
 
+        $('.pin').click(function() {
+          const cardId = '#card-' + $(this).attr('id');
+          var offset = $(`#provider-cards ${cardId}`)[0].offsetTop - $("#provider-cards")[0].offsetTop;
+          $("#provider-cards").animate({scrollTop: offset}, 500, 'swing');
+        });
+
         var bbox = turf.bbox(data);
         map.fitBounds(bbox, { padding: 50 });
 
