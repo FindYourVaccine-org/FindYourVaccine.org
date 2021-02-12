@@ -78,8 +78,10 @@ function makeMap(csvData) {
 
         $('.pin').click(function() {
           const cardId = '#card-' + $(this).attr('id');
-          var offset = $(`#provider-cards ${cardId}`)[0].offsetTop - $("#provider-cards")[0].offsetTop;
+          var offset = $(`#provider-cards ${cardId}`)[0].offsetTop - $("#provider-cards")[0].offsetTop - 3;
           $("#provider-cards").animate({scrollTop: offset}, 500, 'swing');
+          $('.location-card').removeClass('highlight-card');
+          $(cardId).addClass('highlight-card');
         });
 
         var bbox = turf.bbox(data);
