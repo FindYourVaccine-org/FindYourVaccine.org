@@ -125,14 +125,18 @@ function makeCards(csvData) {
   }
 
   var cardsHtml = data.map((cardData) => {
-    let cardStatus = "card-unknown";
+    let statusClass = "card-unknown";
+    let statusText = "No data on location";
     switch(cardData['Status']) {
       case "No vaccine available":
-        cardStatus = "card-no"; break;
+        statusClass = "card-no";
+        statusText = "Vaccine unavailable"; break;
       case "Have vaccine, no appointments":
-        cardStatus = "card-no-appt"; break;
+        statusClass = "card-no-appt";
+        statusText = "Not scheduling appointments"; break;
       case "Available for eligible":
-        cardStatus = "card-available";
+        statusClass = "card-available";
+        statusText = "Vaccine available for eligible";
     };
 
     return `
@@ -146,7 +150,7 @@ function makeCards(csvData) {
   <div class="card__middle">
     <div>
       <div class="card__last-updated">${cardData["Last Contacted"]}</div>
-      <div class="card__pill ${cardStatus}">${cardData["Status"]}</div>
+      <div class="card__pill ${statusClass}">${statusText}</div>
     </div>
     <div>${
       cardData["Website"] &&
