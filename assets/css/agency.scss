@@ -66,13 +66,32 @@ $contact-image: "{{ site.data.style.contact-image }}";
       font-size: 12px;
       margin-bottom: 4px;
     }
-    .card__pill--success {
-      background-color: green;
+    .card__pill {
       border-radius: 24px;
-      background-color: #abe3c3;
       font-weight: 700;
       font-size: 14px;
       padding: 4px 12px;
+      color: #fff;
+      text-shadow: #000 0px 0px 3px;
+      -webkit-font-smoothing: antialiased;
+      -moz-user-select: -moz-none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+
+      &.card-available {
+        background-color: #1a9641;
+      }
+      &.card-no-appt {
+        background-color: #fdae61;
+      }
+      &.card-no {
+        background-color: #d7191c;
+      }
+      &.card-unknown {
+        background-color: #4a9ecf;
+      }
     }
     .card__cta {
       padding: 12px 16px;
