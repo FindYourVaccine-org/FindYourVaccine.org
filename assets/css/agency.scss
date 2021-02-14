@@ -34,6 +34,14 @@ $contact-image: "{{ site.data.style.contact-image }}";
 
 // Custom CSS
 
+::selection {
+  background: #0ff !important;
+}
+
+::-moz-selection {
+  background: #0ff !important;
+}
+
 // Card CSS
 
 .location-card {
