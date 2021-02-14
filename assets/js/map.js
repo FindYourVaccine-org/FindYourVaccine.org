@@ -67,7 +67,7 @@ function makeMap(csvData) {
             case "Available for eligible":
               el.className = "pin status-available"; el.style.background = "#1a9641"; break;
             default:
-              el.className = "pin status-unknown"; el.style.background = "#4a9ecf";
+              el.className = "pin status-unknown"; el.style.background = "#333333";
           };
 
           new mapboxgl.Marker(el)
@@ -124,6 +124,19 @@ function makeCards(csvData) {
     data.push(Object.assign({}, entry));
   }
 
+  const statusSort = {
+    "Available for eligible": 0,
+    "Have vaccine, no appointments": 1,
+    "No vaccine available": 2,
+    "Unknown": 3
+  };
+  data.sort(function(a, b) {
+    if (a.Status === b.Status) {
+      return new Date(b['Last call timestamp']) - new Date(a['Last call timestamp']);
+    }
+    return statusSort[a.Status] > statusSort[b.Status] ? 1 : -1;
+  });
+
   var cardsHtml = data.map((cardData) => {
     let statusClass = "card-unknown";
     let statusText = "No data on location";
@@ -139,6 +152,23 @@ function makeCards(csvData) {
         statusText = "Vaccine available for eligible";
     };
 
+    let cardDetails = "";
+    if (cardData["Last restrictions"]) {
+      cardDetails += `<div><strong>Restrictions:</strong> ${cardData["Last restrictions"]}</div>`;
+    }
+    if (cardData["Last groups served"]) {
+      cardDetails += `<div><strong>Eligibility:</strong> ${cardData["Last groups served"]}</div>`;
+    }
+    if (cardData["Last appointment instructions"]) {
+      cardDetails += `<div><strong>Appointment instructions:</strong> ${cardData["Last appointment instructions"]}</div>`;
+    }
+    if (cardData["Last external notes"]) {
+      cardDetails += `<div><strong>Notes:</strong> ${cardData["Last external notes"]}</div>`;
+    }
+    if (cardDetails.length > 0) {
+      cardDetails = `<div class="card__footer">${cardDetails}</div>`;
+    }
+
     return `
 <div class="location-card" id="card-${cardData.ID}">
   <header class="card__header">
@@ -149,23 +179,19 @@ function makeCards(csvData) {
   </header>
   <div class="card__middle">
     <div>
-      <div class="card__last-updated">${cardData["Last Contacted"]}</div>
+      <div class="card__last-updated">Last updated: ${cardData["Last Contacted"]}</div>
       <div class="card__pill ${statusClass}">${statusText}</div>
     </div>
     <div>${
       cardData["Website"] &&
-      `
-            <a target="_blank" href="${cardData["Website"]}" class="card__cta">
+      `<a target="_blank" href="${cardData["Website"]}" class="card__cta">
         Visit Website <img src="/assets/img/custom/external-link-white.svg"
       /></a>
       `
     }
-
     </div>
   </div>
-  <div class="card__footer">${cardData["Last appointment instructions"]} / ${
-      cardData["Last restrictions"]
-    } /  ${cardData["Last external notes"]} / ${cardData["Summary"]}</div>
+  ${cardDetails}
 </div>
     `;
   });

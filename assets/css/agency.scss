@@ -46,16 +46,16 @@ $contact-image: "{{ site.data.style.contact-image }}";
     .card__title {
       font-size: 16px;
       font-weight: 700;
-      // line-height: 18.75px;
-      margin-bottom: 4px;
     }
     .card__addr {
       font-size: 14px;
 
     }
-    margin-bottom: 30px;
+    margin-bottom: 10px;
   }
   .card__middle {
+    margin-top: 10px;
+    margin-bottom: 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -72,7 +72,7 @@ $contact-image: "{{ site.data.style.contact-image }}";
       font-size: 14px;
       padding: 4px 12px;
       color: #fff;
-      text-shadow: #000 0px 0px 3px;
+      text-shadow: #000 1px 1px 3px;
       -webkit-font-smoothing: antialiased;
       -moz-user-select: -moz-none;
       -khtml-user-select: none;
@@ -90,7 +90,7 @@ $contact-image: "{{ site.data.style.contact-image }}";
         background-color: #d7191c;
       }
       &.card-unknown {
-        background-color: #4a9ecf;
+        background-color: #333333;
       }
     }
     .card__cta {
@@ -107,7 +107,6 @@ $contact-image: "{{ site.data.style.contact-image }}";
         top: -2px;
       }
     }
-    margin-bottom: 12px;
   }
   .card__footer {
     border: 1px solid #dfe1e5;
