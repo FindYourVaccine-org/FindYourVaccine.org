@@ -40,7 +40,7 @@ function makeMap(csvData) {
   map = new mapboxgl.Map({
     container: "map", // container id
     style: "mapbox://styles/mapbox/light-v10", // stylesheet location
-    center: [parseFloat(CENTER_LON), parseFloat(CENTER_LAT)], // starting position
+    center: [CENTER_LON, CENTER_LAT], // starting position
     zoom: 4, // starting zoom
     transformRequest: transformRequest,
   });
@@ -106,7 +106,9 @@ function makeMap(csvData) {
           latitude: CENTER_LAT,
           longitude: CENTER_LON,
         });
-        map.addControl(geocoder);
+        geocoder.setBbox([MIN_X, MIN_Y, MAX_X, MAX_Y]);
+        $('#map-search').append(geocoder.onAdd(map));
+        geocoder.setPlaceholder("Search by address, zip code, or location");
       });
     }
   );

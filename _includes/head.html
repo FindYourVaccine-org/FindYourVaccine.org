@@ -81,8 +81,12 @@
       const GSHEET_ID = '1124pvazfFxhHkfFldcdrhSoh8DlpPwu0QvUskupEiG0';
       // set GSHEET_NAME and lat/lon for specific state
       const GSHEET_NAME = "{{ page.abbrev }}";
-      const CENTER_LAT = `{{ page.lat }}`;
-      const CENTER_LON = `{{ page.lon }}`;
+      const CENTER_LAT = parseFloat(`{{ page.lat }}`);
+      const CENTER_LON = parseFloat(`{{ page.lon }}`);
+      const MIN_X = parseFloat(`{{ page.minX }}`);
+      const MIN_Y = parseFloat(`{{ page.minY }}`);
+      const MAX_X = parseFloat(`{{ page.maxX }}`);
+      const MAX_Y = parseFloat(`{{ page.maxY }}`);
     </script>
     <script async src="/assets/js/map.js"></script>
     <script src="assets/js/netliva_switch.js"></script>

@@ -121,7 +121,7 @@ $contact-image: "{{ site.data.style.contact-image }}";
     border-radius: 8px;
     padding: 12px;
     font-size: 14px;
-    // margin: 8px 8px 0;
+    word-wrap: break-word;
   }
 }
 

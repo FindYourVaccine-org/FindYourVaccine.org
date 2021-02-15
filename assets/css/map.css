@@ -4,7 +4,7 @@
 }
 
 .mapboxgl-ctrl-geocoder {
-  max-width: 10%;
+  width: 100%;
 }
 
 /* Map filter styling */
