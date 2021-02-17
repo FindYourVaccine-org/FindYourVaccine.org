@@ -109,6 +109,7 @@ function makeMap(csvData) {
         geocoder.setBbox([MIN_X, MIN_Y, MAX_X, MAX_Y]);
         $('#map-search').append(geocoder.onAdd(map));
         geocoder.setPlaceholder("Search by address, zip code, or location");
+        map.resize();
       });
     }
   );
@@ -198,6 +199,9 @@ function makeCards(csvData) {
     `;
   });
   $("#provider-cards").html(cardsHtml);
+
+  map.resize();
+  updateVisible();
 
   $('.location-card').mouseenter(function() {
     const pinId = '#' + $(this).attr('id').replace('card-', '');
