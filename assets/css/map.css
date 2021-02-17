@@ -123,3 +123,15 @@
 .mapboxgl-container {
   cursor: pointer;
 }
+
+@media(max-width: 991px) {
+  .cards-container {
+    width: 100%;
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  #map {
+    display: none;
+  }
+}
