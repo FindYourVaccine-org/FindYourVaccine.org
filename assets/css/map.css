@@ -23,15 +23,23 @@
 }
 
 #map {
-    max-height: 70vh;
+  max-height: 70vh;
 }
 
 .providers-container {
-  margin-left: 5px;
+  margin: 15px;
 }
 
 #map-search {
-  margin: 10px;
+  min-width: 70%;
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+#locate-provider {
+  min-width: 20%;
+  display: inline-block;
+  margin-bottom: 4px;
 }
 
 .cards-container {
