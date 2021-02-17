@@ -24,10 +24,13 @@
 
 #map {
   max-height: 70vh;
+  border: 1px solid rgba(0,0,0,0.125);
+  border-radius: .25rem;
 }
 
 .providers-container {
-  margin: 15px;
+  margin-left: 10px;
+  margin-right: 20px;
 }
 
 #map-search {
