@@ -120,6 +120,10 @@
 }
 
 @media (max-width: 991px) {
+  #cards-and-search {
+    min-width: 100%;
+  }
+
   .cards-container {
     width: 100%;
     max-height: none;
