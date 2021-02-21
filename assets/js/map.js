@@ -180,12 +180,12 @@ function makeCards(csvData) {
       <span>${cardData.Address} <a target="_blank" href="https://www.google.com/maps/dir//${cardData.Name}, ${cardData.Address}"><i style="font-size:20px" class="material-icons">directions</i></a></span>
     </div>
   </header>
-  <div class="card__middle">
-    <div>
+  <div class="card__middle row">
+    <div class="col-sm-auto col-12">
       <div class="card__last-updated">Last updated: ${cardData["Last Contacted"]}</div>
       <div class="card__pill ${statusClass}">${statusText}</div>
     </div>
-    <div>${
+    <div class="col-sm-auto">${
       cardData["Website"] &&
       `<a target="_blank" href="${cardData["Website"]}" class="card__cta">
         Visit Website <i style="font-size:14px" class="material-icons">launch</i></a>

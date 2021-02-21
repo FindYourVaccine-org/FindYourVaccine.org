@@ -75,10 +75,13 @@ $contact-image: "{{ site.data.style.contact-image }}";
       margin-bottom: 4px;
     }
     .card__pill {
+      white-space: nowrap;
+      text-align: center;
       border-radius: 24px;
       font-weight: 700;
       font-size: 14px;
       padding: 4px 12px;
+      margin-bottom: 2px;
       color: #fff;
       text-shadow: #000 1px 1px 3px;
       -webkit-font-smoothing: antialiased;
@@ -102,7 +105,8 @@ $contact-image: "{{ site.data.style.contact-image }}";
       }
     }
     .card__cta {
-      min-width: 130px;
+      white-space: nowrap;
+      text-align: center;
       padding: 12px 16px;
       color: white;
       background-color: #0066cc;
