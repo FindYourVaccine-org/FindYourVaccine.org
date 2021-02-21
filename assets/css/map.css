@@ -55,17 +55,12 @@
 
 #map {
   max-height: 70vh;
-  border: 1px solid rgba(0,0,0,0.125);
-  border-radius: .25rem;
-}
-
-.providers-container {
-  margin-left: 10px;
-  margin-right: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
 }
 
 #map-search {
-  min-width: 70%;
+  min-width: 420px;
   display: inline-block;
   margin-bottom: 4px;
 }
@@ -106,7 +101,7 @@
 }
 
 .pin:after {
-  content: '';
+  content: "";
   width: 7px;
   height: 7px;
   margin: 4px 0 0 4px;
@@ -124,7 +119,7 @@
   cursor: pointer;
 }
 
-@media(max-width: 991px) {
+@media (max-width: 991px) {
   .cards-container {
     width: 100%;
     max-height: none;
@@ -133,5 +128,14 @@
 
   #map {
     display: none;
+  }
+
+  #locate-provider {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
   }
 }

@@ -188,8 +188,7 @@ function makeCards(csvData) {
     <div>${
       cardData["Website"] &&
       `<a target="_blank" href="${cardData["Website"]}" class="card__cta">
-        Visit Website <img src="/assets/img/custom/external-link-white.svg"
-      /></a>
+        Visit Website <i style="font-size:14px" class="material-icons">launch</i></a>
       `
     }
     </div>
