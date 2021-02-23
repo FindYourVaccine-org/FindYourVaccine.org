@@ -1,17 +1,22 @@
 /* Map filter styling */
-#filters {
-  display: none;
+#map-and-filters {
+  height: 100%;
+}
+
+.hide {
+  display: none !important;
 }
 
 .filter-ui {
-  background: #fff;
-  position: absolute;
-  bottom: 30px;
-  right: 10px;
+  background-color: #fff;
   z-index: 100;
+  display: block;
+  position: absolute;
+  top: 0px;
   text-align: left;
-  padding: 10px;
-  border-radius: 3px;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  margin: 5px;
 }
 
 .filter-header {
@@ -42,19 +47,45 @@
 .key-container {
   display: flex;
   align-items: center;
-  margin-bottom: 14px;
-}
-.key-container:last-child {
-  margin-bottom: 0;
+  padding: 10px;
 }
 
 .key-container .switch-container {
   text-align: right;
-  margin-left: 16px;
+  margin-left: 5px;
+}
+
+@media (max-width: 991px) {
+  .filter-ui {
+    display: block;
+    width: 100%;
+    border: none;
+    margin: none;
+  }
+
+  .key-container {
+    min-width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+  }
 }
 
 #map {
-  max-height: 70vh;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+#mobile-map-holder {
+  display: none;
+  min-height: 50vh;
+  overflow-y: show;
+}
+
+#wide-map-holder {
+  min-height: 80vh;
+  padding: 0;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
 }
@@ -76,7 +107,7 @@
 }
 
 .cards-container {
-  max-height: 60vh;
+  max-height: 80vh;
   overflow-y: scroll;
   padding: 16px;
   border-radius: 8px;
@@ -119,6 +150,10 @@
   cursor: pointer;
 }
 
+#map-toggle-header {
+  display: none;
+}
+
 @media (max-width: 991px) {
   #cards-and-search {
     min-width: 100%;
@@ -130,10 +165,6 @@
     overflow-y: visible;
   }
 
-  #map {
-    display: none;
-  }
-
   #locate-provider {
     margin: 0;
     position: absolute;
@@ -141,5 +172,13 @@
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+  }
+
+  #map-toggle-header {
+    display: block;
+    text-align: center;
+    width: 100%;
+    font-size: .9em;
+    margin: 5px;
   }
 }

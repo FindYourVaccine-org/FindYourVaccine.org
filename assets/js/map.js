@@ -14,7 +14,44 @@ var filters = document.getElementById("filters");
 
 $(document).ready(function () {
   fetchSheet();
+
+  // If needed, switch to mobile view on initial load
+  var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+  if (width <= 990) {
+    $("#wide-map-holder").hide();
+    var mapToMove = $("#map-and-filters").detach();
+    $("#mobile-map-holder").append(mapToMove);
+  }
+
+  // Move map above cards for smaller widths on resizing
+  $(window).resize(function() {
+    var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+    if (width <= 990 && $("#wide-map-holder").is(":visible")) {
+      $("#wide-map-holder").hide();
+      var mapToMove = $("#map-and-filters").detach();
+      $("#mobile-map-holder").append(mapToMove);
+      $("#mobile-map-holder").show();
+      map.resize();
+    } else if ($("#mobile-map-holder").is(":visible")) {
+      $("#mobile-map-holder").hide();
+      var mapToMove = $("#map-and-filters").detach();
+      $("#wide-map-holder").append(mapToMove);
+      $("#wide-map-holder").show();
+      map.resize();
+    }
+  });
+
+  // Show map on mobile toggle
+  $("#map-toggle").on("click", function(e) {
+    toggleMobileMap(e);
+  });
 });
+
+function toggleMobileMap(e) {
+  $(e.target).text(($(e.target).text() == 'Show map') ? 'Hide map' : 'Show map');
+  $("#mobile-map-holder").toggle();
+  e.preventDefault();
+}
 
 function fetchSheet() {
   $.ajax({
@@ -54,7 +91,7 @@ function makeMap(csvData) {
     },
     function (err, data) {
       map.on("load", function () {
-        $("#filters").show();
+        $("#filters").removeClass('hide');
 
         data.features.forEach(function(pin) {
           var el = document.createElement('span');
