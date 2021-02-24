@@ -18,7 +18,7 @@ title: Call a provider
       <h3 id="name"></h3>
       <h2 id="phone"></h2><br />
       <h6 id="contacted"></h6><br />
-      <button class="btn btn-primary btn-sm" onclick="window.location.reload();">No answer? Go to next provider</button><br /><br />
+      <button id="no-answer" class="btn btn-primary btn-sm" onclick="window.location.reload();">No answer? Go to next provider</button><br /><br />
       <h5 id="website"></h5>
       <h6 id="address"></h6>
       <br /><br />
@@ -108,6 +108,10 @@ $(document).ready(function () {
 
       // Parse hidden fields into prefilled forms
       $("#wrong-info").attr('href', `https://airtable.com/shrzDS45VGDFjuZpE?prefill_Name=${data['Name']}&prefill_Phone=${data['Phone']}&prefill_Address=${data['Address']}&prefill_Website=${data['Website']}`)
+
+      $("#wrong-info").show();
+      $("#no-answer").show();
+
       var prefills = `prefill_Location=${data['Name']}&prefill_Caller=${data['Caller']}`;
 
       // Add iframe to the page
