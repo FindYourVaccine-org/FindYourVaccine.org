@@ -31,15 +31,20 @@ $(document).ready(function () {
   $(window).resize(function() {
     var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
     if (width <= 990 && $("#wide-map-holder").is(":visible")) {
+      // Resize to smaller screen
       $("#wide-map-holder").hide();
       var filtersToMove = $("#filters").detach();
       $("#mobile-filters-holder").append(filtersToMove);
       var mapToMove = $("#map-and-filters").detach();
       $("#mobile-map-holder").append(mapToMove);
       $("#mobile-map-holder").show();
+      $("#mobile-filters-holder").show();
       map.resize();
-    } else if ($("#mobile-map-holder").is(":visible")) {
+      $("#map-toggle").text("Hide map");
+    } else if (width > 990) {
+      // Resize to larger screen
       $("#mobile-map-holder").hide();
+      $("#mobile-filters-holder").hide();
       var filtersToMove = $("#filters").detach();
       $("#map-filter-holder").append(filtersToMove);
       var mapToMove = $("#map-and-filters").detach();
