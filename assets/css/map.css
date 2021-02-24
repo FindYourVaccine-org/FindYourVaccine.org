@@ -66,6 +66,7 @@
 @media (max-width: 991px) {
   .filter-ui {
     display: block;
+    position: relative;
     width: 80%;
   }
 
