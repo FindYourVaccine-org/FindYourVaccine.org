@@ -3,10 +3,6 @@
   height: 100%;
 }
 
-.hide {
-  display: none !important;
-}
-
 .filter-ui {
   background-color: #fff;
   z-index: 100;
@@ -55,18 +51,26 @@
   margin-left: 5px;
 }
 
+#mobile-map-holder {
+  display: none;
+  min-height: 50vh;
+}
+
+#mobile-filters-holder {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: center;
+}
+
 @media (max-width: 991px) {
   .filter-ui {
     display: block;
-    width: 100%;
-    border: none;
-    margin: none;
+    width: 80%;
   }
 
-  .key-container {
-    min-width: 100%;
-    border: 1px solid #ddd;
-    border-radius: 0.25rem;
+  #filters {
+    min-width: 80%;
   }
 }
 
@@ -75,12 +79,6 @@
   top: 0;
   bottom: 0;
   width: 100%;
-}
-
-#mobile-map-holder {
-  display: none;
-  min-height: 50vh;
-  overflow-y: show;
 }
 
 #wide-map-holder {

@@ -42,6 +42,10 @@ $contact-image: "{{ site.data.style.contact-image }}";
   background: #0ff !important;
 }
 
+.hide {
+  display: none !important;
+}
+
 // Card CSS
 
 .location-card {

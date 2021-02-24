@@ -15,10 +15,14 @@ var filters = document.getElementById("filters");
 $(document).ready(function () {
   fetchSheet();
 
+  $("#mobile-filters-holder").toggle();
+
   // If needed, switch to mobile view on initial load
   var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
   if (width <= 990) {
     $("#wide-map-holder").hide();
+    var filtersToMove = $("#filters").detach();
+    $("#mobile-filters-holder").append(filtersToMove);
     var mapToMove = $("#map-and-filters").detach();
     $("#mobile-map-holder").append(mapToMove);
   }
@@ -28,12 +32,16 @@ $(document).ready(function () {
     var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
     if (width <= 990 && $("#wide-map-holder").is(":visible")) {
       $("#wide-map-holder").hide();
+      var filtersToMove = $("#filters").detach();
+      $("#mobile-filters-holder").append(filtersToMove);
       var mapToMove = $("#map-and-filters").detach();
       $("#mobile-map-holder").append(mapToMove);
       $("#mobile-map-holder").show();
       map.resize();
     } else if ($("#mobile-map-holder").is(":visible")) {
       $("#mobile-map-holder").hide();
+      var filtersToMove = $("#filters").detach();
+      $("#map-filter-holder").append(filtersToMove);
       var mapToMove = $("#map-and-filters").detach();
       $("#wide-map-holder").append(mapToMove);
       $("#wide-map-holder").show();
@@ -50,7 +58,9 @@ $(document).ready(function () {
 function toggleMobileMap(e) {
   $(e.target).text(($(e.target).text() == 'Show map') ? 'Hide map' : 'Show map');
   $("#mobile-map-holder").toggle();
+  $("#mobile-filters-holder").toggle();
   e.preventDefault();
+  map.resize();
 }
 
 function fetchSheet() {
@@ -91,8 +101,6 @@ function makeMap(csvData) {
     },
     function (err, data) {
       map.on("load", function () {
-        $("#filters").removeClass('hide');
-
         data.features.forEach(function(pin) {
           var el = document.createElement('span');
           el.id = pin.properties['ID'];
