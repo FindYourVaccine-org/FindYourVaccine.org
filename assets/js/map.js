@@ -106,6 +106,9 @@ function makeMap(csvData) {
     },
     function (err, data) {
       map.on("load", function () {
+        $("#providers-container").show();
+        map.resize();
+
         data.features.forEach(function(pin) {
           var el = document.createElement('span');
           el.id = pin.properties['ID'];

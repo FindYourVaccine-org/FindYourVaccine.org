@@ -48,6 +48,10 @@ $contact-image: "{{ site.data.style.contact-image }}";
 
 // Card CSS
 
+#providers-container {
+  display: none;
+}
+
 .location-card {
   background-color: white;
   border-radius: 8px;
