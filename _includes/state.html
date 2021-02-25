@@ -29,7 +29,7 @@
       <center>
       {% if page.lat %}
         <a href="#providers">
-          <button class="btn btn-primary">View provider availability map</button>
+          <button class="btn btn-primary">View provider availability in {{ page.name }}</button>
         </a>
       {% else %}
         <div id="hold-providers-link" class="invisible">
@@ -131,16 +131,12 @@
       </button>
     </a>
   </center>
-  <br />
 </div>
 
 {{ content }}
 
 <a name="providers"></a>
 {% if page.lat %}
-  <center>
-    <button id="locate-provider" class="btn btn-primary">Find a provider near me</button><br /><br />
-  </center>
   {% include map.html %}
 {% endif %}
 

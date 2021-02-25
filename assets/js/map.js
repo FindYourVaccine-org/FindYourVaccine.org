@@ -4,39 +4,69 @@ mapboxgl.accessToken = MAPBOX_TOKEN;
 
 var transformRequest = (url, resourceType) => {
   var isMapboxRequest =
-    url.slice(8, 22) === "api.mapbox.com" ||
-    url.slice(10, 26) === "tiles.mapbox.com";
+    url.slice(8, 22) === "api.mapbox.com" || url.slice(10, 26) === "tiles.mapbox.com";
   return {
     url: isMapboxRequest ? url.replace("?", "?pluginName=sheetMapper&") : url,
   };
 };
 
-var colors = [
-  "match",
-  ["get", "Status"],
-  "No vaccine available",
-  "#d7191c",
-  "Have vaccine, no appointments",
-  "#fdae61",
-  "Available for eligible",
-  "#1a9641",
-  /* other */ "#0571b0",
-];
-
-  // TODO: add colorblind mode options
-  // "No vaccine available",
-  // "#b0611a",
-  // "Have vaccine, no appointments",
-  // "#dfc27d",
-  // "Available for eligible",
-  // "#019071",
-  // /* other */ "#666",
-
 var filters = document.getElementById("filters");
 
 $(document).ready(function () {
   fetchSheet();
+
+  $("#mobile-filters-holder").toggle();
+
+  // If needed, switch to mobile view on initial load
+  var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+  if (width <= 990) {
+    $("#wide-map-holder").hide();
+    var filtersToMove = $("#filters").detach();
+    $("#mobile-filters-holder").append(filtersToMove);
+    var mapToMove = $("#map-and-filters").detach();
+    $("#mobile-map-holder").append(mapToMove);
+  }
+
+  // Move map above cards for smaller widths on resizing
+  $(window).resize(function() {
+    var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+    if (width <= 990 && $("#wide-map-holder").is(":visible")) {
+      // Resize to smaller screen
+      $("#wide-map-holder").hide();
+      var filtersToMove = $("#filters").detach();
+      $("#mobile-filters-holder").append(filtersToMove);
+      var mapToMove = $("#map-and-filters").detach();
+      $("#mobile-map-holder").append(mapToMove);
+      $("#mobile-map-holder").show();
+      $("#mobile-filters-holder").show();
+      map.resize();
+      $("#map-toggle").text("Hide map");
+    } else if (width > 990) {
+      // Resize to larger screen
+      $("#mobile-map-holder").hide();
+      $("#mobile-filters-holder").hide();
+      var filtersToMove = $("#filters").detach();
+      $("#map-filter-holder").append(filtersToMove);
+      var mapToMove = $("#map-and-filters").detach();
+      $("#wide-map-holder").append(mapToMove);
+      $("#wide-map-holder").show();
+      map.resize();
+    }
+  });
+
+  // Show map on mobile toggle
+  $("#map-toggle").on("click", function(e) {
+    toggleMobileMap(e);
+  });
 });
+
+function toggleMobileMap(e) {
+  $(e.target).text(($(e.target).text() == 'Show map') ? 'Hide map' : 'Show map');
+  $("#mobile-map-holder").toggle();
+  $("#mobile-filters-holder").toggle();
+  e.preventDefault();
+  map.resize();
+}
 
 function fetchSheet() {
   $.ajax({
@@ -46,6 +76,7 @@ function fetchSheet() {
     success: function (csvData) {
       if (csvData.length > 0) {
         makeMap(csvData);
+        makeCards(csvData);
       } else {
         setTimeout(function () {
           fetchSheet();
@@ -61,7 +92,7 @@ function makeMap(csvData) {
   map = new mapboxgl.Map({
     container: "map", // container id
     style: "mapbox://styles/mapbox/light-v10", // stylesheet location
-    center: [parseFloat(CENTER_LON), parseFloat(CENTER_LAT)], // starting position
+    center: [CENTER_LON, CENTER_LAT], // starting position
     zoom: 4, // starting zoom
     transformRequest: transformRequest,
   });
@@ -75,147 +106,46 @@ function makeMap(csvData) {
     },
     function (err, data) {
       map.on("load", function () {
-        $("#filters").show();
+        data.features.forEach(function(pin) {
+          var el = document.createElement('span');
+          el.id = pin.properties['ID'];
+          switch(pin.properties['Status']) {
+            case "No vaccine available":
+              el.className = "pin status-no"; el.style.background = "#d7191c"; break;
+            case "Have vaccine, no appointments":
+              el.className = "pin status-no-appt"; el.style.background = "#fdae61"; break;
+            case "Available for eligible":
+              el.className = "pin status-available"; el.style.background = "#1a9641"; break;
+            default:
+              el.className = "pin status-unknown"; el.style.background = "#333333";
+          };
 
-        // Add the data source for later reference
-        map.addSource("data", {
-          type: "geojson",
-          data: data,
-          generateId: true, // This ensures that all features have unique IDs
-        });
-
-        // Add the data layer to the map
-        map.addLayer({
-          id: "csvData",
-          type: "circle",
-          source: "data",
-          paint: {
-            "circle-radius": 5,
-            "circle-color": colors,
-          },
-        });
-
-        // add click 'target' layer
-        map.addLayer({
-          id: "clickData",
-          type: "circle",
-          source: "data",
-          layout: {},
-          paint: {
-            "circle-radius": 7,
-            "circle-opacity": 0,
-            "circle-stroke-color": "#000",
-            "circle-stroke-width": 3,
-            "circle-stroke-opacity": [
-              "case",
-              ["boolean", ["feature-state", "clicked"], false],
-              1,
-              0,
-            ],
-          },
-        });
-
-        // When a click event occurs on a feature in the csvData layer, open a popup with description HTML from its properties.
-        map.on("click", "csvData", function (e) {
-          // Show click layer for single marker when clicked
-          if (e.features.length > 0) {
-            if (clickedStateId) {
-              map.setFeatureState(
-                { source: "data", id: clickedStateId },
-                { clicked: false }
-              );
-            }
-            clickedStateId = e.features[0].id;
-            map.setFeatureState(
-              { source: "data", id: clickedStateId },
-              { clicked: true }
-            );
-          }
-
-          var coordinates = e.features[0].geometry.coordinates.slice();
-
-          // set popup text
-          var ps = e.features[0].properties;
-
-          var description = `<h3>${ps.Name}</h3>`;
-
-          if (ps["Last Contacted"]) {
-            description += `<small>Last updated: ${ps["Last Contacted"]}</small>`;
-          }
-
-          if (ps["Last external notes"]) {
-            description += `${converter.makeHtml(ps["Last external notes"])}`;
-          }
-
-          if (ps["Last restrictions"]) {
-            description += `<h4><b>Restrictions: </b>${ps["Last restrictions"]}</h4>`;
-          }
-
-          if (ps["Last appointment instructions"]) {
-            description += `<h4><b>Appointment instructions: </b>${converter.makeHtml(
-              ps["Last appointment instructions"]
-            )}</h4>`;
-          }
-
-          description += `<h4><b>Address: </b>${ps.Address}</h4>`;
-
-          if (ps.Website) {
-            description += `<h4><b>Website: </b>${link(ps.Website)}</h4>`;
-          }
-
-          if (ps.Email) {
-            description += `<h4><b>Email: </b><a href="mailto:${ps.Email}">${ps.Email}</a></h4>`;
-          }
-
-          // Ensure that if the map is zoomed out such that multiple
-          // copies of the feature are visible, the popup appears
-          // over the copy being pointed to.
-          while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-          }
-
-          // add popup to map
-          var popup = new mapboxgl.Popup()
-            .setLngLat(coordinates)
-            .setHTML(description)
+          new mapboxgl.Marker(el)
+            .setRotation(-45)
+            .setLngLat(pin.geometry.coordinates)
             .addTo(map);
         });
 
-        map.on("mouseenter", "csvData", function () {
-          map.getCanvas().style.cursor = "pointer";
-        });
-
-        map.on("mouseleave", "csvData", function () {
-          map.getCanvas().style.cursor = "";
+        $('.pin').click(function() {
+          const cardId = '#card-' + $(this).attr('id');
+          var offset = $(`#provider-cards ${cardId}`)[0].offsetTop - $("#provider-cards")[0].offsetTop - 3;
+          $("#provider-cards").animate({scrollTop: offset}, 500, 'swing');
+          $('.location-card').removeClass('highlight-card');
+          $(cardId).addClass('highlight-card');
         });
 
         var bbox = turf.bbox(data);
         map.fitBounds(bbox, { padding: 50 });
 
-        var checkboxes = $(".map-filter-checkbox");
-        $.each(checkboxes, function (i, box) {
-          box.addEventListener("change", update);
-        });
-
-        // Call when someone clicks on a checkbox and changes the selection of markers to be displayed
-        function update() {
-          var enabled = {};
-          for (var i = 0; i < checkboxes.length; i++) {
-            if (checkboxes[i].checked) enabled[checkboxes[i].id] = true;
-          }
-          enabledArr = Object.keys(enabled);
-          enabledArr.push("x"); // filter expects at least one value
-
-          var clickFilter = [
-            "match",
-            ["get", "Status"],
-            enabledArr,
-            true,
-            false,
-          ];
-          map.setFilter("csvData", clickFilter);
-          map.setFilter("clickData", clickFilter);
+        // Tie filter toggles to data
+        for (const name of ['available', 'no-appt', 'no', 'unknown']) {
+          $(`#status-${name}`).on('change', function() {
+            $(`.status-${name}`).toggle();
+            updateVisible();
+          });
         }
+
+        map.on('moveend', function() { updateVisible(); });
 
         var geocoder = new MapboxGeocoder({
           accessToken: mapboxgl.accessToken,
@@ -226,8 +156,129 @@ function makeMap(csvData) {
           latitude: CENTER_LAT,
           longitude: CENTER_LON,
         });
-        map.addControl(geocoder);
+        geocoder.setBbox([MIN_X, MIN_Y, MAX_X, MAX_Y]);
+        $('#map-search').append(geocoder.onAdd(map));
+        geocoder.setPlaceholder("Search by address, zip, or location");
+        map.resize();
       });
     }
   );
+}
+
+function makeCards(csvData) {
+  var rows = Papa.parse(csvData).data;
+  var keys = rows[0];
+  data = [];
+  for (i = 1; i < rows.length; i++) {
+    var entry = {};
+    for (j = 0; j < rows[i].length; j++) {
+      entry[keys[j]] = rows[i][j];
+    }
+    data.push(Object.assign({}, entry));
+  }
+
+  const statusSort = {
+    "Available for eligible": 0,
+    "Have vaccine, no appointments": 1,
+    "No vaccine available": 2,
+    "Unknown": 3
+  };
+  data.sort(function(a, b) {
+    if (a.Status === b.Status) {
+      return new Date(b['Last call timestamp']) - new Date(a['Last call timestamp']);
+    }
+    return statusSort[a.Status] > statusSort[b.Status] ? 1 : -1;
+  });
+
+  var cardsHtml = data.map((cardData) => {
+    let statusClass = "card-unknown";
+    let statusText = "No data on location";
+    switch(cardData['Status']) {
+      case "No vaccine available":
+        statusClass = "card-no";
+        statusText = "Vaccine unavailable"; break;
+      case "Have vaccine, no appointments":
+        statusClass = "card-no-appt";
+        statusText = "Not scheduling appointments"; break;
+      case "Available for eligible":
+        statusClass = "card-available";
+        statusText = "Vaccine available for eligible";
+    };
+
+    let cardDetails = "";
+    if (cardData["Last restrictions"]) {
+      cardDetails += `<div><strong>Restrictions:</strong> ${cardData["Last restrictions"]}</div>`;
+    }
+    if (cardData["Last groups served"]) {
+      cardDetails += `<div><strong>Eligibility:</strong> ${cardData["Last groups served"]}</div>`;
+    }
+    if (cardData["Last appointment instructions"]) {
+      cardDetails += `<div><strong>Appointment instructions:</strong> ${cardData["Last appointment instructions"]}</div>`;
+    }
+    if (cardData["Last external notes"]) {
+      cardDetails += `<div><strong>Notes:</strong> ${cardData["Last external notes"]}</div>`;
+    }
+    if (cardDetails.length > 0) {
+      cardDetails = `<div class="card__footer">${cardDetails}</div>`;
+    }
+
+    return `
+<div class="location-card" id="card-${cardData.ID}">
+  <header class="card__header">
+    <h1 class="card__title">${cardData.Name}</h1>
+    <div class="card__addr">
+      <span>${cardData.Address} <a target="_blank" href="https://www.google.com/maps/dir//${cardData.Name}, ${cardData.Address}"><i style="font-size:20px" class="material-icons">directions</i></a></span>
+    </div>
+  </header>
+  <div class="card__middle row">
+    <div class="col-sm-auto col-12">
+      <div class="card__last-updated">Last updated: ${cardData["Last Contacted"]}</div>
+      <div class="card__pill ${statusClass}">${statusText}</div>
+    </div>
+    <div class="col-sm-auto">${
+      cardData["Website"] &&
+      `<a target="_blank" href="${cardData["Website"]}" class="card__cta">
+        Visit Website <i style="font-size:14px" class="material-icons">launch</i></a>
+      `
+    }
+    </div>
+  </div>
+  ${cardDetails}
+</div>
+    `;
+  });
+  $("#provider-cards").html(cardsHtml);
+
+  map.resize();
+  updateVisible();
+
+  $('.location-card').mouseenter(function() {
+    const pinId = '#' + $(this).attr('id').replace('card-', '');
+    $(pinId).addClass('highlight-pin');
+  }).mouseleave(function() {
+    const pinId = '#' + $(this).attr('id').replace('card-', '');
+    $(pinId).removeClass('highlight-pin');
+  });
+}
+
+function intersectRect(r1, r2) {
+  return !(r2.left > r1.right ||
+    r2.right < r1.left ||
+    r2.top > r1.bottom ||
+    r2.bottom < r1.top);
+}
+
+function updateVisible() {
+  var cc = map.getContainer();
+  var els = cc.getElementsByClassName('pin');
+  var ccRect = cc.getBoundingClientRect();
+  for (var i=0; i < els.length; i++) {
+    var el = els.item(i);
+    var elRect = el.getBoundingClientRect();
+    if (intersectRect(ccRect, elRect)) {
+      $(`#card-${el.id}`).show();
+    } else {
+      $(`#card-${el.id}`).hide();
+    }
+  }
 }

@@ -46,7 +46,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js" integrity="sha512-XKa9Hemdy1Ui3KSGgJdgMyYlUg1gM+QhL6cnlyTe2qzMCYm4nAZ1PsVerQzTTXzonUR+dmswHqgJPuwCq1MaAg==" crossorigin="anonymous"></script>
 
   <!-- Custom fonts for this template -->
-  <link href="assets/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Space+Grotesk" rel="stylesheet" type="text/css">
   <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -74,14 +73,19 @@
     {% if page.lat %}
     <link href="/assets/css/map.css" rel="stylesheet" />
     <link rel="stylesheet" href="/assets/css/netliva_switch.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <script>
       const MAPBOX_TOKEN = 'pk.eyJ1IjoiZmluZHlvdXJ2YWNjaW5lIiwiYSI6ImNrano2b2FmczAxMmQyd3Biajg3Mmg2a2cifQ.oOyj-x2PbbQJ35Iza4RMnA';
       const GSHEET_ID = '1124pvazfFxhHkfFldcdrhSoh8DlpPwu0QvUskupEiG0';
       // set GSHEET_NAME and lat/lon for specific state
       const GSHEET_NAME = "{{ page.abbrev }}";
-      const CENTER_LAT = `{{ page.lat }}`;
-      const CENTER_LON = `{{ page.lon }}`;
+      const CENTER_LAT = parseFloat(`{{ page.lat }}`);
+      const CENTER_LON = parseFloat(`{{ page.lon }}`);
+      const MIN_X = parseFloat(`{{ page.minX }}`);
+      const MIN_Y = parseFloat(`{{ page.minY }}`);
+      const MAX_X = parseFloat(`{{ page.maxX }}`);
+      const MAX_Y = parseFloat(`{{ page.maxY }}`);
     </script>
     <script async src="/assets/js/map.js"></script>
     <script src="assets/js/netliva_switch.js"></script>

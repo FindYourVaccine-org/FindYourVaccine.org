@@ -34,6 +34,111 @@ $contact-image: "{{ site.data.style.contact-image }}";
 
 // Custom CSS
 
+::selection {
+  background: #0ff !important;
+}
+
+::-moz-selection {
+  background: #0ff !important;
+}
+
+.hide {
+  display: none !important;
+}
+
+// Card CSS
+
+.location-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 1px 1px 20px 2px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin-bottom: 3px;
+  .card__header {
+    .card__title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .card__addr {
+      font-size: 14px;
+
+    }
+    margin-bottom: 10px;
+  }
+  .card__middle {
+    margin-top: 10px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .card__last-updated {
+      color: gray;
+      font-style: italic;
+      color: #5f6368;
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+    .card__pill {
+      white-space: nowrap;
+      text-align: center;
+      border-radius: 24px;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 4px 12px;
+      margin-bottom: 2px;
+      color: #fff;
+      text-shadow: #000 1px 1px 3px;
+      -webkit-font-smoothing: antialiased;
+      -moz-user-select: -moz-none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+
+      &.card-available {
+        background-color: #1a9641;
+      }
+      &.card-no-appt {
+        background-color: #fdae61;
+      }
+      &.card-no {
+        background-color: #d7191c;
+      }
+      &.card-unknown {
+        background-color: #333333;
+      }
+    }
+    .card__cta {
+      white-space: nowrap;
+      text-align: center;
+      padding: 12px 16px;
+      color: white;
+      background-color: #0066cc;
+      border-radius: 8px;
+      font-size: 14px;
+      display: block;
+      line-height: 1;
+      font-weight: 700;
+      img {
+        position: relative;
+        top: -2px;
+      }
+    }
+  }
+  .card__footer {
+    border: 1px solid #dfe1e5;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 14px;
+    word-wrap: break-word;
+  }
+}
+
+.highlight-card {
+  box-shadow: 0 0 5px #0ff;
+}
+
+// Cam's CSS
 .fixed-position {
   position: fixed;
 }
@@ -110,7 +215,6 @@ html body {
 
   #mainNav.navbar, #mainNav.navbar-shrink {
     background-color: inherit !important;
-
     .navbar-toggler.navbar-toggler-right {
       background-color: #fcfcfc;
       color: black;

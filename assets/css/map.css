@@ -1,28 +1,22 @@
-#map {
-  height: 70vh;
-  width: 100vw;
-}
-
-.mapboxgl-ctrl-geocoder {
-  max-width: 10%;
-}
-
 /* Map filter styling */
-#filters {
-  display: none;
+#map-and-filters {
+  height: 100%;
 }
 
 .filter-ui {
-  background: #fff;
-  position: absolute;
-  bottom: 30px;
-  right: 10px;
+  background-color: #fff;
   z-index: 100;
+  display: block;
+  position: absolute;
+  top: 0px;
   text-align: left;
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 1px 1px 20px 2px rgba(0, 0, 0, 0.1);
-  max-width: 280px;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  margin: 5px;
+}
+
+.filter-header {
+  line-height: 2em;
 }
 
 .filter-ui label {
@@ -49,15 +43,75 @@
 .key-container {
   display: flex;
   align-items: center;
-  margin-bottom: 14px;
-}
-.key-container:last-child {
-  margin-bottom: 0;
+  padding: 10px;
 }
 
 .key-container .switch-container {
   text-align: right;
-  margin-left: 16px;
+  margin-left: 5px;
+}
+
+#mobile-map-holder {
+  display: none;
+  min-height: 50vh;
+}
+
+#mobile-filters-holder {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+@media (max-width: 991px) {
+  .filter-ui {
+    display: block;
+    position: relative;
+    width: 80%;
+  }
+
+  #filters {
+    min-width: 80%;
+  }
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+#wide-map-holder {
+  min-height: 80vh;
+  padding: 0;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+
+#map-search {
+  min-width: 410px;
+  display: flex;
+  margin-bottom: 4px;
+  padding-right: 10px;
+}
+
+.mapboxgl-ctrl-geocoder {
+  min-width: 100%;
+}
+
+#locate-provider {
+  min-width: 20%;
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+.cards-container {
+  max-height: 80vh;
+  overflow-y: scroll;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 20px 2px rgba(0, 0, 0, 0.1);
 }
 
 .dot {
@@ -67,69 +121,55 @@
   flex-shrink: 0;
 }
 
-/* Map popup styling */
-.mapboxgl-popup {
-  padding-bottom: 5px;
+.pin {
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  border-radius: 50% 50% 50% 0;
+  background: #ff0000;
+  position: absolute;
+  margin-top: -7px;
 }
 
-.mapboxgl-popup-content {
-  font: 400 15px/22px "Source Sans Pro", "Helvetica Neue", Sans-serif;
-  padding: 0;
-  width: 250px;
-  max-height: 400px;
-  overflow-y: scroll;
+.pin:after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  margin: 4px 0 0 4px;
+  background: #fff;
+  opacity: 0.7;
+  position: absolute;
+  border-radius: 50%;
 }
 
-.mapboxgl-popup-content-wrapper {
-  padding: 1%;
-}
-
-.mapboxgl-popup-content small {
-  padding-left: 10px;
-}
-
-.mapboxgl-popup-content p {
-  padding-left: 7px;
-  padding-right: 5px;
-}
-
-.mapboxgl-popup-content h3 {
-  background: rgb(61, 59, 59);
-  text-align: center;
-  color: #fff;
-  margin: 0;
-  display: block;
-  padding: 15px;
-  font-weight: 700;
-  font-size: 1.2em;
-  margin-top: -5px;
-}
-
-.mapboxgl-popup-content h4 {
-  margin: 0;
-  display: block;
-  padding: 10px 3px 10px 10px;
-  font-weight: 400;
-  font-size: 1em;
+.highlight-pin {
+  box-shadow: 0 0 12px 6px #0ff;
 }
 
 .mapboxgl-container {
   cursor: pointer;
 }
 
-.mapboxgl-popup {
-  transform: none !important;
-  top: 15%;
-  left: 10px;
+#map-toggle-header {
+  display: none;
 }
-.mapboxgl-popup-anchor-top .mapboxgl-popup-tip,
-.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip,
-.mapboxgl-popup-anchor-center .mapboxgl-popup-tip,
-.mapboxgl-popup-anchor-left .mapboxgl-popup-tip,
-.mapboxgl-popup-anchor-right .mapboxgl-popup-tip,
-.mapboxgl-popup-anchor-bottom-right .mapboxgl-popup-tip,
-.mapboxgl-popup-anchor-bottom-left .mapboxgl-popup-tip,
-.mapboxgl-popup-anchor-top-right .mapboxgl-popup-tip,
-.mapboxgl-popup-anchor-top-left .mapboxgl-popup-tip {
-  display: none !important;
+
+@media (max-width: 991px) {
+  #cards-and-search {
+    min-width: 100%;
+  }
+
+  .cards-container {
+    width: 100%;
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  #map-toggle-header {
+    display: block;
+    text-align: center;
+    width: 100%;
+    font-size: 0.9em;
+    margin: 5px;
+  }
 }
