@@ -164,20 +164,20 @@
     overflow-y: visible;
   }
 
-  #locate-provider {
+  /* #locate-provider {
     margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-  }
+  } */
 
   #map-toggle-header {
     display: block;
     text-align: center;
     width: 100%;
-    font-size: .9em;
+    font-size: 0.9em;
     margin: 5px;
   }
 }
