@@ -158,7 +158,7 @@ function makeMap(csvData) {
         });
         geocoder.setBbox([MIN_X, MIN_Y, MAX_X, MAX_Y]);
         $('#map-search').append(geocoder.onAdd(map));
-        geocoder.setPlaceholder("Search by address, zip code, or location");
+        geocoder.setPlaceholder("Search by address, zip, or location");
         map.resize();
       });
     }

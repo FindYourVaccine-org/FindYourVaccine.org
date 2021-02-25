@@ -90,9 +90,10 @@
 }
 
 #map-search {
-  min-width: 420px;
-  display: inline-block;
+  min-width: 410px;
+  display: flex;
   margin-bottom: 4px;
+  padding-right: 10px;
 }
 
 .mapboxgl-ctrl-geocoder {
@@ -163,15 +164,6 @@
     max-height: none;
     overflow-y: visible;
   }
-
-  /* #locate-provider {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-  } */
 
   #map-toggle-header {
     display: block;
