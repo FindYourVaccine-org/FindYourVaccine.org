@@ -1,38 +1,67 @@
-<div id="map" class="map-legend">
-  <nav id="filters" class="filter-ui">
-    <div class="key-container">
-      <span class="dot" style="background-color: #019071"></span>
-      <label class="filter-label" for="Available for eligible"
-        >Vaccine available for those eligible</label
-      >
-      <div class="switch-container">
-        <input type="checkbox" class="map-filter-checkbox" netliva-switch id="Available for eligible" checked />
+<div id="providers-container">
+  <div class="container-fluid">
+    <div class="row">
+      <div id="cards-and-search" class="col-5">
+        <div class="row justify-content-center">
+          <div id="map-search"></div>
+          <button id="locate-provider" class="btn btn-primary">
+            <i style="font-size:14px" class="material-icons">my_location</i> Use my location
+          </button>
+        </div>
+        <div id="map-toggle-header">Results sorted by availability &#8226; 
+          <strong><a id="map-toggle" href="#">Show map</a></strong>
+        </div>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12" id="mobile-map-holder"></div>
+          </div>
+          <div class="row">
+            <div class="col-12" id="mobile-filters-holder"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div id="provider-cards" class="cards-container col-sm-12"></div>
+        </div>
+      </div>
+      <div id="wide-map-holder" class="col-7">
+        <div id="map-and-filters">
+          <div id="map-filter-holder">
+            <div id="filters" class="filter-ui">
+              <div class="key-container">
+                <span class="dot" style="background-color: #1a9641"></span>
+                <label class="filter-label" for="status-available">Vaccine available</label>
+                <div class="switch-container">
+                  <input type="checkbox" class="map-filter-checkbox" netliva-switch id="status-available" checked />
+                </div>
+              </div>
+              <div class="key-container">
+                <span class="dot" style="background-color: #fdae61"></span>
+                <label class="filter-label" for="status-no-appt">Limited availability</label>
+                <div class="switch-container">
+                  <input type="checkbox" class="map-filter-checkbox" netliva-switch id="status-no-appt" checked />
+                </div>
+              </div>
+              <div class="key-container">
+                <span class="dot" style="background-color: #d7191c"></span>
+                <label class="filter-label" for="status-no">Vaccine unavailable</label>
+                <div class="switch-container">
+                  <input type="checkbox" class="map-filter-checkbox" netliva-switch id="status-no" checked />
+                </div>
+              </div>
+              <div class="key-container">
+                <span class="dot" style="background-color: #333333"></span>
+                <label class="filter-label" for="status-unknown">No data available</label>
+                <div class="switch-container">
+                  <input type="checkbox" class="map-filter-checkbox" netliva-switch id="status-unknown" checked />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="map"></div>
+        </div>
       </div>
     </div>
-    <div class="key-container">
-      <span class="dot" style="background-color: #dfc27d"></span>
-      <label class="filter-label" for="Have vaccine, no appointments"
-        >No appointments available</label
-      >
-      <div class="switch-container">
-        <input type="checkbox" class="map-filter-checkbox" netliva-switch id="Have vaccine, no appointments" checked />
-      </div>
-    </div>
-    <div class="key-container">
-      <span class="dot" style="background-color: #b0611a"></span>
-      <label class="filter-label" for="No vaccine available">Vaccine unavailable</label>
-      <div class="switch-container">
-        <input type="checkbox" class="map-filter-checkbox" netliva-switch id="No vaccine available" checked />
-      </div>
-    </div>
-    <div class="key-container">
-      <span class="dot" style="background-color: #666"></span>
-      <label class="filter-label" for="Unknown">No data on location</label>
-      <div class="switch-container">
-        <input type="checkbox" class="map-filter-checkbox" netliva-switch id="Unknown" checked />
-      </div>
-    </div>
-  </nav>
+  </div>
 </div>
 
 <script>
