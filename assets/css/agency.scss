@@ -297,13 +297,23 @@ html body {
       text-align: left;
 
       .right {
-        img {
+        img, figure#projectsvg, svg {
           width: 100%;
           height: auto;
+          border-radius: 0.8em;
         }
       }
     }
   }
+}
+
+.intro-text path {
+  fill:#0065cb;
+  stroke-width:0.176389
+}
+.intro-text path:hover {
+  fill:#0ff;
+
 }
 
 header.masthead .intro-text {
