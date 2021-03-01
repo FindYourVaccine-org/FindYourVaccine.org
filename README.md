@@ -1,4 +1,4 @@
-## [FindYourVaccine.org](FindYourVaccine.org)
+## [FindYourVaccine.org](https://www.findyourvaccine.org/)
 
 ### To run locally:
 
