@@ -251,6 +251,8 @@ function makeCards(csvData) {
       }
     }
 
+    var lastContact = moment(cardData["Last call timestamp"], "YYYY-MM-DD HH:mm:ss.SSSZ").fromNow();
+
     return `
 <div class="location-card" id="card-${cardData.ID}">
   <header class="card__header">
@@ -262,7 +264,7 @@ function makeCards(csvData) {
   </header>
   <div class="card__middle row">
     <div class="col-sm-auto col-12">
-      <div class="card__last-updated">Last updated: ${cardData["Last Contacted"]}</div>
+      <div class="card__last-updated">Last verified: ${lastContact}.</div>
       <div class="card__pill ${statusClass}">${statusText}</div>
     </div>
     <div class="col-sm-auto">${
