@@ -78,7 +78,8 @@
 
     <script>
       const MAPBOX_TOKEN = 'pk.eyJ1IjoiZmluZHlvdXJ2YWNjaW5lIiwiYSI6ImNrano2b2FmczAxMmQyd3Biajg3Mmg2a2cifQ.oOyj-x2PbbQJ35Iza4RMnA';
-      const GSHEET_ID = '1124pvazfFxhHkfFldcdrhSoh8DlpPwu0QvUskupEiG0';
+      const GSHEET_CALLS = '1124pvazfFxhHkfFldcdrhSoh8DlpPwu0QvUskupEiG0';
+      const GSHEET_APPTS = '1jTtay_gIx0r5QIXNEbURNgA9wEO_JZDueeIkPj8KN50';
       // set GSHEET_NAME and lat/lon for specific state
       const GSHEET_NAME = "{{ page.abbrev }}";
       const CENTER_LAT = parseFloat(`{{ page.lat }}`);
@@ -90,6 +91,7 @@
     </script>
     <script async src="/assets/js/map.js"></script>
     <script src="assets/js/netliva_switch.js"></script>
+    <script src="assets/js/moment.min.js"></script>
     {% endif %}
 
   {% endif %}

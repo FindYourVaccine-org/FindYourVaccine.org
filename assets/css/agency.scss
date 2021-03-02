@@ -63,6 +63,11 @@ $contact-image: "{{ site.data.style.contact-image }}";
       font-size: 16px;
       font-weight: 700;
     }
+    .card__appointments {
+      float: right;
+      font-size: 12px;
+      font-weight: bold;
+    }
     .card__addr {
       font-size: 14px;
 

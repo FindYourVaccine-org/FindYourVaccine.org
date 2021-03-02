@@ -13,7 +13,7 @@ var transformRequest = (url, resourceType) => {
 var filters = document.getElementById("filters");
 
 $(document).ready(function () {
-  fetchSheet();
+  fetchCalls();
 
   $("#mobile-filters-holder").toggle();
 
@@ -68,20 +68,33 @@ function toggleMobileMap(e) {
   map.resize();
 }
 
-function fetchSheet() {
+function fetchCalls() {
   $.ajax({
     type: "GET",
-    url: `https://docs.google.com/spreadsheets/d/${GSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${GSHEET_NAME}`,
+    url: `https://docs.google.com/spreadsheets/d/${GSHEET_CALLS}/gviz/tq?tqx=out:csv&sheet=${GSHEET_NAME}`,
     dataType: "text",
-    success: function (csvData) {
-      if (csvData.length > 0) {
-        makeMap(csvData);
-        makeCards(csvData);
+    success: function (callData) {
+      if (callData.length > 0) {
+        addAppointments(callData);
       } else {
         setTimeout(function () {
-          fetchSheet();
+          fetchCalls();
         }, 2000);
       }
+    },
+  });
+}
+
+function addAppointments(callData) {
+  $.ajax({
+    type: "GET",
+    url: `https://docs.google.com/spreadsheets/d/${GSHEET_APPTS}/gviz/tq?tqx=out:csv&sheet=${GSHEET_NAME}`,
+    dataType: "text",
+    success: function (apptData) {
+      apptData = apptData.substring(apptData.indexOf('\n')+1) // remove extra header row
+      csvData = callData + apptData;
+      makeMap(csvData);
+      makeCards(csvData);
     },
   });
 }
@@ -188,7 +201,11 @@ function makeCards(csvData) {
   };
   data.sort(function(a, b) {
     if (a.Status === b.Status) {
-      return new Date(b['Last call timestamp']) - new Date(a['Last call timestamp']);
+      if (a.Appointments == '0' && b.Appointments == '0') {
+        return new Date(b['Last call timestamp']) - new Date(a['Last call timestamp']);
+      } else {
+        return parseInt(a.Appointments) > parseInt(b.Appointments) ? -1 : 1;
+      }
     }
     return statusSort[a.Status] > statusSort[b.Status] ? 1 : -1;
   });
@@ -225,23 +242,35 @@ function makeCards(csvData) {
       cardDetails = `<div class="card__footer">${cardDetails}</div>`;
     }
 
+    CTA = cardData.Appointments > 0 ? 'Book Now' : 'Visit Website'
+    appointments = ''
+    if (cardData.Appointments > 0) {
+      appointments = `${cardData.Appointments} open appointment`
+      if (cardData.Appointments > 1) {
+        appointments += 's'
+      }
+    }
+
+    var lastContact = moment(cardData["Last call timestamp"], "YYYY-MM-DD HH:mm:ss.SSSZ").fromNow();
+
     return `
 <div class="location-card" id="card-${cardData.ID}">
   <header class="card__header">
     <h1 class="card__title">${cardData.Name}</h1>
+    <div class="card__appointments">${appointments}</div>
     <div class="card__addr">
       <span>${cardData.Address} <a target="_blank" href="https://www.google.com/maps/dir//${cardData.Name}, ${cardData.Address}"><i style="font-size:20px" class="material-icons">directions</i></a></span>
     </div>
   </header>
   <div class="card__middle row">
     <div class="col-sm-auto col-12">
-      <div class="card__last-updated">Last updated: ${cardData["Last Contacted"]}</div>
+      <div class="card__last-updated">Last verified: ${lastContact}.</div>
       <div class="card__pill ${statusClass}">${statusText}</div>
     </div>
     <div class="col-sm-auto">${
       cardData["Website"] &&
       `<a target="_blank" href="${cardData["Website"]}" class="card__cta">
-        Visit Website <i style="font-size:14px" class="material-icons">launch</i></a>
+        ${CTA} <i style="font-size:14px" class="material-icons">launch</i></a>
       `
     }
     </div>
