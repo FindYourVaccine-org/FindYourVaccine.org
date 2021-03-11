@@ -19,12 +19,11 @@ By aggregating the best resources, vaccine availability updates, and state guida
 
 ### WHERE WE GET OUR DATA
 
-Our data comes directly from the official COVID-19 vaccine portals for each U.S. state and territory. This includes each state's current vaccine rollout plan and active eligible population groups. The CDC's list of state health portals can be found here.
+Our eligibility data comes directly from the official COVID-19 vaccine portals for each U.S. state and territory. This includes each state's current vaccine rollout plan and active eligible population groups. The CDC's list of state health portals can be found here.
 
 Our list of vaccine provider sites and locations comes from these official state portals, as well as applicable local jurisdiction portals (regional/county/municipality).
 
-Our updates on current appointment and vaccine availability status at each location comes from regular phone- and email- volunteer outreach to individual provider sites. All updates include the date/timestamp of the most recent check-in.
-
+Our updates on current appointment and vaccine availability status at each location comes from regular phone- and email- volunteer outreach to individual provider sites, along with appointment data via [VaccineSpotter.org](https://www.vaccinespotter.org). All updates include the date/timestamp of the most recent check-in.
 
 ### HOW TO GET INVOLVED
 
