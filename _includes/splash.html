@@ -7,7 +7,8 @@
         <div class="dropdown-label">{{ site.data.sitetext.header.text | markdownify }}</div>
         <select class="custom-select" name="state" id="state" onchange="location = this.value;">
           <option disabled selected value="">Select your state...</option>
-          {% for state in site.states %}
+          {% assign sortedStates = site.states | sort: 'name' %}
+          {% for state in sortedStates %}
           <option value="{{ state.abbrev }}">{{ state.name }}</option>
           {% endfor %}
         </select>
