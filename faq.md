@@ -38,36 +38,7 @@ The cost of the vaccine itself is covered by the CARES Act; [however, as noted o
 
 Vaccine allocation to each state is managed by the Federal Government - specifically, by the U.S. Department of Health and Human Services. [Find more information about the HHS vaccination allocation and distribution plan here](https://www.hhs.gov/coronavirus/covid-19-vaccines/distribution/index.html).
 
-<br/><br/>
-## FindYourVaccine.org FAQ
-
----
-
-### Where we get our data:
-
-Our eligibility data primarily comes directly from the official COVID-19 vaccine portals for each U.S. state and territory. This includes each state's current vaccine rollout plan and active eligible population groups. [The CDC's list of these state portals can be found here](https://www.cdc.gov/publichealthgateway/healthdirectories/healthdepartments.html).
-
-Our list of vaccine provider sites and locations comes from these official state portals, as well as applicable local jurisdiction portals (regional/county/municipality) and community-provided sources.
-
-Our updates on current appointment and vaccine availability status at each location comes from regular phone and email-based volunteer outreach to individual provider sites. All updates include the date/timestamp of the most recent check-in.
-
-### Is there an official national database of all vaccine providers operating in all states?
-
-Not yet! That's one of the big reasons we got started. We look forward to supporting any federal government effort to catalogue and sync up national vaccine providers.
-
-### Are there any other non-governmental efforts happening to provide vaccine information for certain states?
-
-Yes! We applaud the teams behind the excellent sites below, and encourage you to visit and support their efforts:
-
-- [Vaccinate CA](http://www.vaccinateca.com)
-- [Vaccinate GA](http://www.vaccinatega.com)
-- [Vaccinate MI](https://www.covid19vaccinemi.com/)
-- [Vaccinate PA](http://www.vaccinatepa.org)
-- [NYC Vaccine List](http://www.nycvaccinelist.com)
-- [COVID-19 Vaccine Status NJ](https://covid19vaccinestatusnj.com/)
-- [Covid 19 Vaccine TX](http://www.covid19vaccinetx.com)
-
-<br/><br/>
+<br/>
 ## More Information
 
 ---
@@ -82,8 +53,4 @@ Yes! We applaud the teams behind the excellent sites below, and encourage you to
 
 ### U.S. and Global Vaccine Facts and Figures:
 
-<sup>_FindYourVaccine.org is not affiliated with any publication or resource provided on this page._</sup>
-
 - [Bloomberg News and World Report Vaccine Distribution Tracker:](https://www.bloomberg.com/graphics/covid-vaccine-tracker-global-distribution/)
-
-<br /><br />
