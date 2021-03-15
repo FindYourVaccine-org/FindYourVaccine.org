@@ -57,43 +57,9 @@
   <link rel="stylesheet" type="text/css" href="assets/css/all.min.css" >
 
   {% if page.layout == "state" %}
-  <!-- map and table scripts -->
   <script src="assets/js/papaparse.min.js"></script>
   <script src="assets/js/showdown.min.js"></script>
-  <script src="https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.js"></script>
-  <link href="https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.css" rel="stylesheet" />
-  <script src='https://npmcdn.com/csv2geojson@latest/csv2geojson.js'></script>
-  <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
-  <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
-  <link
-  rel="stylesheet"
-  href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css"
-  type="text/css"
-  />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    {% if page.lat %}
-    <link href="/assets/css/map.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/assets/css/netliva_switch.css" />
-
-    <script>
-      const MAPBOX_TOKEN = 'pk.eyJ1IjoiZmluZHlvdXJ2YWNjaW5lIiwiYSI6ImNrano2b2FmczAxMmQyd3Biajg3Mmg2a2cifQ.oOyj-x2PbbQJ35Iza4RMnA';
-      const GSHEET_CALLS = '1124pvazfFxhHkfFldcdrhSoh8DlpPwu0QvUskupEiG0';
-      const GSHEET_APPTS = '1jTtay_gIx0r5QIXNEbURNgA9wEO_JZDueeIkPj8KN50';
-      // set GSHEET_NAME and lat/lon for specific state
-      const GSHEET_NAME = "{{ page.abbrev }}";
-      const CENTER_LAT = parseFloat(`{{ page.lat }}`);
-      const CENTER_LON = parseFloat(`{{ page.lon }}`);
-      const MIN_X = parseFloat(`{{ page.minX }}`);
-      const MIN_Y = parseFloat(`{{ page.minY }}`);
-      const MAX_X = parseFloat(`{{ page.maxX }}`);
-      const MAX_Y = parseFloat(`{{ page.maxY }}`);
-    </script>
-    <script async src="/assets/js/map.js"></script>
-    <script src="assets/js/netliva_switch.js"></script>
-    <script src="assets/js/moment.min.js"></script>
-    {% endif %}
-
   {% endif %}
 
   <!-- Page container change top padding when nav shrinks -->
